@@ -1,0 +1,29 @@
+:root {
+  --AI-msg-width:
+}
+
+.user-msg {
+
+  background-color: rgb(88, 198, 88);
+  padding: 10px;
+  border-radius: 20px;
+  margin-block: 5%;
+  width: fit-content;
+}
+
+
+
+.AI-words {
+  opacity: 0;
+  transition: .3s ease-in-out opacity;
+
+}
+
+.visible {
+  opacity: 1;
+}
+
+.selected {
+  border: rgb(255, 163, 178);
+background-color: green;
+}
