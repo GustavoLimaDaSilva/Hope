@@ -21,6 +21,7 @@ app.use('/videos', express.static('./lessons/videos'))
 
 app.get('/lessons', (req, res) => {
 
+    console.log(lessons)
     res.json(lessons)
 })
 
@@ -49,7 +50,6 @@ app.get('/decks/:uid', (req, res) => {
     })
 
    const userDecks =  personal_decks.find(u => u.uid === uid)?.decks ?? []
-    console.log(userDecks.decks)
 
     res.json({
         lesson_decks: lesson_decks,

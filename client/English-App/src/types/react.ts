@@ -1,3 +1,5 @@
+import type { User } from "firebase/auth"
+
 export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>
 
 export interface ProfileData {
@@ -58,5 +60,11 @@ export interface ReactLessonProps {
     setIndex: StateSetter<number>
     lesson: LessonType
 }
+
+export interface TanstackRouterContext {
+    getUser: () => User | null,
+    getProfileData: () => ProfileData 
+}
+
 
 

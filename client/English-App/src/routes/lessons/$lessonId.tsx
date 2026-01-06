@@ -6,9 +6,25 @@ import { useLoaderData } from "react-router"
 import type { LessonType } from "../../types/react.ts"
 import Deck from "../../components/flashcardComponents/deck.tsx"
 
-export const Route = createFileRoute('/lesson/$lessonId')({
+export const Route = createFileRoute('/lessons/$lessonId')({
   component: Lesson,
+
+  validateSearch: (search) =>
+    search as {
+      userId: string
+    },
+  loaderDeps: ({ search: { lessonId } }) => ({
+    lessonId,
+  }),
+  loader: async ({ deps: { lessonId } }) => {
+
+    const raw = await fetch(`http://localhost:3000/lessons/${lessonId}`)
+
+    return await raw.json()
+  },
 })
+
+
 
 
 
@@ -18,6 +34,7 @@ export default function Lesson() {
   const children = [Explanation, Video, Deck]
   const [index, setIndex] = useState(0)
   const Current = children[index]
+
   return (
     <div className="lesson-overview">
       {Current && <Current setIndex={setIndex} lesson={lesson} />}

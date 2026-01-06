@@ -1,11 +1,17 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import CreateCustomBrowserRouter from './RouterProvider'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
+import { routeTree } from './routeTree.gen.ts'
+import { useGoogleUser, useProfileData } from './userStore.ts'
+import type { TanstackRouterContext } from './types/react.ts'
 
-const router = createRouter({ routeTree })
+const router = createRouter({
+  routeTree,
+  context: {
+    getUser: () => useGoogleUser.getState().googleUser,
+    getProfileData: () => useProfileData.getState().profileData
+  } satisfies TanstackRouterContext
+})
 
 declare module '@tanstack/react-router' {
   interface Register {
@@ -14,6 +20,5 @@ declare module '@tanstack/react-router' {
 }
 
 createRoot(document.getElementById('root')!).render(
-    // <CreateCustomBrowserRouter />
-    <RouterProvider router={router}/>
+  <RouterProvider router={router} />
 )

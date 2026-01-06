@@ -5,28 +5,29 @@ import Toast from "../../components/toast.tsx"
 import DashboardLogic from "../../components/dashboardLogic.tsx"
 import { createFileRoute } from "@tanstack/react-router"
 import { useGoogleUser, useProfileData } from "../../userStore.ts"
-const user = useGoogleUser.getState().googleUser
 
 export const Route = createFileRoute('/dashboard/')({
     component: DashBoardOverview,
-    loader: async () => {
+    shouldReload: () => true,
+    loader: async ({ context }) => {
 
+        const user = context.getUser()
+console.log(user)
         if (!user) {
             return { storedProfile: null }
         }
         const rawProfile = await fetch(`http://localhost:3000/users/${user.uid}`)
         const storedProfile = await rawProfile.json()
 
-        // const rawLesson = await fetch('http://localhost:3000/lessons')
-        // const lessons =  rawProfile.ok ? await rawLesson.json() : {}
-
-        return { storedProfile: storedProfile }
+        const rawLesson = await fetch('http://localhost:3000/lessons')
+        const lessons = rawProfile.ok ? await rawLesson.json() : []
+        return { storedProfile: storedProfile, lessons: lessons }
     },
 })
 
 function DashBoardOverview() {
 
-    const { storedProfile } = Route.useLoaderData() satisfies { storedProfile: ProfileData }
+    const { storedProfile, lessons } = Route.useLoaderData() satisfies { storedProfile: ProfileData, lessons: LessonType[] }
 
     const profileData = useProfileData((state) => state.profileData)
 
@@ -45,7 +46,7 @@ function DashBoardOverview() {
                         Converse com a nossa IA em inglês
                     </div>
                 </Link>
-                {/* {lessons.map((l, index) => <Link to={`lessons/${l.id}/intro`} key={index}>{l.name}</Link>)} */}
+                {lessons.map((l, index) => <Link to={`/lessons/${l.id}`} key={index}>{l.name}</Link>)}
             </div>
         </DashboardLogic>
     )

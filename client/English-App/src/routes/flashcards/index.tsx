@@ -23,7 +23,6 @@ export const Route = createFileRoute('/flashcards/')({
 })
 
 export default function FlashcardsIndex() {
-
     const decks: DecksType = Route.useLoaderData()
 
     const createDeckLinks = (d: DeckType, index: number) => <Link to={`flashcards/deck/${d.id}`} key={index}>{d.name}</Link>

@@ -13,7 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as FlashcardsIndexRouteImport } from './routes/flashcards/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
-import { Route as LessonLessonIdRouteImport } from './routes/lesson/$lessonId'
+import { Route as LessonsLessonIdRouteImport } from './routes/lessons/$lessonId'
 import { Route as FlashcardsCriarDeckRouteImport } from './routes/flashcards/criarDeck'
 
 const LoginRoute = LoginRouteImport.update({
@@ -36,9 +36,9 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/dashboard/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LessonLessonIdRoute = LessonLessonIdRouteImport.update({
-  id: '/lesson/$lessonId',
-  path: '/lesson/$lessonId',
+const LessonsLessonIdRoute = LessonsLessonIdRouteImport.update({
+  id: '/lessons/$lessonId',
+  path: '/lessons/$lessonId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FlashcardsCriarDeckRoute = FlashcardsCriarDeckRouteImport.update({
@@ -51,7 +51,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
   '/flashcards/criarDeck': typeof FlashcardsCriarDeckRoute
-  '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/dashboard': typeof DashboardIndexRoute
   '/flashcards': typeof FlashcardsIndexRoute
 }
@@ -59,7 +59,7 @@ export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
   '/flashcards/criarDeck': typeof FlashcardsCriarDeckRoute
-  '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/dashboard': typeof DashboardIndexRoute
   '/flashcards': typeof FlashcardsIndexRoute
 }
@@ -68,7 +68,7 @@ export interface FileRoutesById {
   '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
   '/flashcards/criarDeck': typeof FlashcardsCriarDeckRoute
-  '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/flashcards/': typeof FlashcardsIndexRoute
 }
@@ -78,7 +78,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/login'
     | '/flashcards/criarDeck'
-    | '/lesson/$lessonId'
+    | '/lessons/$lessonId'
     | '/dashboard'
     | '/flashcards'
   fileRoutesByTo: FileRoutesByTo
@@ -86,7 +86,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/login'
     | '/flashcards/criarDeck'
-    | '/lesson/$lessonId'
+    | '/lessons/$lessonId'
     | '/dashboard'
     | '/flashcards'
   id:
@@ -94,7 +94,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/login'
     | '/flashcards/criarDeck'
-    | '/lesson/$lessonId'
+    | '/lessons/$lessonId'
     | '/dashboard/'
     | '/flashcards/'
   fileRoutesById: FileRoutesById
@@ -103,7 +103,7 @@ export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   LoginRoute: typeof LoginRoute
   FlashcardsCriarDeckRoute: typeof FlashcardsCriarDeckRoute
-  LessonLessonIdRoute: typeof LessonLessonIdRoute
+  LessonsLessonIdRoute: typeof LessonsLessonIdRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   FlashcardsIndexRoute: typeof FlashcardsIndexRoute
 }
@@ -138,11 +138,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lesson/$lessonId': {
-      id: '/lesson/$lessonId'
-      path: '/lesson/$lessonId'
-      fullPath: '/lesson/$lessonId'
-      preLoaderRoute: typeof LessonLessonIdRouteImport
+    '/lessons/$lessonId': {
+      id: '/lessons/$lessonId'
+      path: '/lessons/$lessonId'
+      fullPath: '/lessons/$lessonId'
+      preLoaderRoute: typeof LessonsLessonIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flashcards/criarDeck': {
@@ -159,7 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   LoginRoute: LoginRoute,
   FlashcardsCriarDeckRoute: FlashcardsCriarDeckRoute,
-  LessonLessonIdRoute: LessonLessonIdRoute,
+  LessonsLessonIdRoute: LessonsLessonIdRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   FlashcardsIndexRoute: FlashcardsIndexRoute,
 }
