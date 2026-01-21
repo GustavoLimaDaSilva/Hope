@@ -17,7 +17,7 @@ Additionally, due to its growing popularity, clear structure, and seamless integ
 
 The second motivation behind this project was to help my parents get started with the fundamentals of English and build vocabulary.
 
-While there is a wide variety of language-learning apps available, I found that many of them lack these three key components:
+While there is a wide variety of language-learning apps available, I found that many of them lack these three components:
 
 - Uninterrupted, conversation-like listening content with English subtitles  
 - Flashcards focused on specific aspects of the language rather than random vocabulary  
@@ -29,7 +29,7 @@ With these shortcomings in mind, the application was designed around three core 
 
 - **Conversation-based listening lessons** with subtitles, each targeting a fundamental aspect of the English language  
 - **Flashcard decks** associated with specific lessons, along with the ability for users to create their own custom decks  
-- **Integration with Google AI models via Firebase**, allowing users to practice language output—an often underestimated component of language acquisition  
+- **Integration with Google AI models via Firebase**, allowing users to practice language output, an often underestimated component of language acquisition  
 
 ## Challenges
 
