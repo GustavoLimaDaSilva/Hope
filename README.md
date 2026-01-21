@@ -1,8 +1,8 @@
-## Description
+### Description
 
 This project was created with two primary goals in mind:
 
-### 1. Learning New Technologies for More Robust Code
+## 1. Learning New Technologies for More Robust Code
 
 When I built my first React application, two recurring issues stood out:
 
@@ -13,7 +13,7 @@ These problems led to extensive debugging sessions and solutions that I am not p
 
 Additionally, due to its growing popularity, clear structure, and seamless integration with TypeScript and schema validators such as **Zod**, I chose **TanStack** for routing.
 
-### 2. Helping My Parents Learn English Fundamentals
+## 2. Helping My Parents Learn English Fundamentals
 
 The second motivation behind this project was to help my parents get started with the fundamentals of English and build vocabulary.
 
@@ -34,6 +34,10 @@ With these shortcomings in mind, the application was designed around three core 
 ## Challenges
 
 - As a front-end developer, I do not yet have the expertise required to design and manage a production-ready database. For this reason, the application currently relies on JSON files as mock data.  
-- I am still looking for free and legal sources of listening content suitable for language learning. 
+- I am still looking for free and legal sources of listening content suitable for language learning.
+
+## License
+
+MIT License
 
 
