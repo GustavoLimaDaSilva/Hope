@@ -1,5 +1,5 @@
 import type { User } from "firebase/auth"
-import type { ProfileData } from "./src/types/react"
+import type { ProfileData } from "./src/types/react.ts"
 let LengthParamsTurple: [number, {error: string}]
 
 export function streamTextEffect(text: string) {
@@ -8,7 +8,6 @@ export function streamTextEffect(text: string) {
 
     const el = everyWord.map(w => `<span class='visible'>${w}</span>`).join('')
 
-    console.log(el)
     return el
 }
 

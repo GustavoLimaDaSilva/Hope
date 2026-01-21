@@ -49,7 +49,7 @@ export default function CreateNewDeck() {
     async function postPersonalDeck(form_data: object) {
 
         if (flashcardData.length === 0) return
-console.log(profileData)
+
         const res = await fetch(`http://localhost:3000/personalDecks/${profileData.uid}`, {
             method: 'POST',
             headers: {

@@ -12,7 +12,7 @@ export const Route = createFileRoute('/dashboard/')({
     loader: async ({ context }) => {
 
         const user = context.getUser()
-console.log(user)
+
         if (!user) {
             return { storedProfile: null }
         }
@@ -30,7 +30,9 @@ function DashBoardOverview() {
     const { storedProfile, lessons } = Route.useLoaderData() satisfies { storedProfile: ProfileData, lessons: LessonType[] }
 
     const profileData = useProfileData((state) => state.profileData)
+    const user = useGoogleUser((state) => state.googleUser)
 
+    if (!user) return
 
     const data = localStorage.getItem('toastFired')
     const toastFired = data ? JSON.parse(data) : false
@@ -40,13 +42,13 @@ function DashBoardOverview() {
             <div>
                 {profileData.level === 1 && !toastFired ? <Toast toastFired={toastFired} className="toast" msg="agora você já pode encontrar o deck da sua lição na área de flashcards!" /> : null}
                 <p>hello </p>
-                <Link to={'/flashcards'}>Ver flashcards</Link>
+                <Link to={`/flashcards/${user.uid}`} search={{level: profileData.level}} >Ver flashcards</Link>
                 <Link to={'/chat'}>
                     <div>
                         Converse com a nossa IA em inglês
                     </div>
                 </Link>
-                {lessons.map((l, index) => <Link to={`/lessons/${l.id}`} key={index}>{l.name}</Link>)}
+                {lessons && lessons.map((l, index) => <Link to={`/lessons/${l.id}`} key={index}>{l.name}</Link>)}
             </div>
         </DashboardLogic>
     )

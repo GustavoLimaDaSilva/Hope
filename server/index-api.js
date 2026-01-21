@@ -21,7 +21,6 @@ app.use('/videos', express.static('./lessons/videos'))
 
 app.get('/lessons', (req, res) => {
 
-    console.log(lessons)
     res.json(lessons)
 })
 
@@ -42,30 +41,45 @@ app.get('/decks/:uid', (req, res) => {
 
     const uid = req.params.uid
 
-    const lesson_decks = []
+    const lesson_decks_data = []
     lessons?.some(l => {
 
-        lesson_decks.push(l.flashcard_deck)
+        lesson_decks_data.push({ name: l.name, id: l.id })
         if (l.level === level) return true
     })
 
-   const userDecks =  personal_decks.find(u => u.uid === uid)?.decks ?? []
+    const user_decks_data = []
+    users.find(u => u.uid === uid)
+        .flashcard_deck.forEach(deck => {
+            user_decks_data.push({ name: deck.name, id: deck.id })
+        })
 
     res.json({
-        lesson_decks: lesson_decks,
-        personal_decks: userDecks
+        lessonDecksData: lesson_decks_data,
+        personalDecksData: user_decks_data
     })
 })
 
-app.get('/decks/:id', (req, res) => {
+app.get('/lessonDecks/:id', (req, res) => {
 
     const id = req.params.id
 
-    const deck = decks.find(d => d.id === id)
-    res.json(deck.cards)
+   const deck = lessons.find(l => l.id === id).flashcard_deck
+
+    res.json(deck)
 })
 
-app.post('/personalDecks/:uid', async (req, res) => {
+app.get('/personalDecks/:uid/:deckId', async (req, res) => {
+
+    const uid = req.params.uid
+    const deckId = req.params.deckId
+    const deck = users.find(u => (u.uid === uid))
+        .flashcard_deck.find(d => d.id === deckId)
+
+    res.json(deck)
+})
+
+app.post('/personalDecks/:id', async (req, res) => {
 
     // const form_data = req.body?.form_data
     // const uid = req.params.uid
@@ -75,7 +89,7 @@ app.post('/personalDecks/:uid', async (req, res) => {
     // const success = await writePersonalDeck(normalizedDeck, uid)
 
     // success ? res.status(201).json('Deck created successfully') : res.status(500).json('Internal Server Error')
- res.status(201).json('Deck created successfully')
+    res.status(201).json('Deck created successfully')
 })
 
 app.get('/users/:uid', (req, res) => {
@@ -86,7 +100,6 @@ app.get('/users/:uid', (req, res) => {
     }
     const uid = req.params.uid
     const user = users.find(u => u.uid === uid)
-
     user ? res.json(user) : res.json({})
 })
 

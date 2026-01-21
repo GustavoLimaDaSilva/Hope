@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ChatRouteImport } from './routes/chat'
-import { Route as FlashcardsIndexRouteImport } from './routes/flashcards/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as LessonsLessonIdRouteImport } from './routes/lessons/$lessonId'
 import { Route as FlashcardsCriarDeckRouteImport } from './routes/flashcards/criarDeck'
+import { Route as FlashcardsUidRouteImport } from './routes/flashcards/$uid'
+import { Route as FlashcardsDecksLessonIdRouteImport } from './routes/flashcards/decks/$lessonId'
+import { Route as FlashcardsDecksUidDeckIdRouteImport } from './routes/flashcards/decks/$uid/$deckId'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -24,11 +26,6 @@ const LoginRoute = LoginRouteImport.update({
 const ChatRoute = ChatRouteImport.update({
   id: '/chat',
   path: '/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlashcardsIndexRoute = FlashcardsIndexRouteImport.update({
-  id: '/flashcards/',
-  path: '/flashcards/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
@@ -46,66 +43,96 @@ const FlashcardsCriarDeckRoute = FlashcardsCriarDeckRouteImport.update({
   path: '/flashcards/criarDeck',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FlashcardsUidRoute = FlashcardsUidRouteImport.update({
+  id: '/flashcards/$uid',
+  path: '/flashcards/$uid',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlashcardsDecksLessonIdRoute = FlashcardsDecksLessonIdRouteImport.update({
+  id: '/flashcards/decks/$lessonId',
+  path: '/flashcards/decks/$lessonId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlashcardsDecksUidDeckIdRoute =
+  FlashcardsDecksUidDeckIdRouteImport.update({
+    id: '/flashcards/decks/$uid/$deckId',
+    path: '/flashcards/decks/$uid/$deckId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
+  '/flashcards/$uid': typeof FlashcardsUidRoute
   '/flashcards/criarDeck': typeof FlashcardsCriarDeckRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/flashcards': typeof FlashcardsIndexRoute
+  '/flashcards/decks/$lessonId': typeof FlashcardsDecksLessonIdRoute
+  '/flashcards/decks/$uid/$deckId': typeof FlashcardsDecksUidDeckIdRoute
 }
 export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
+  '/flashcards/$uid': typeof FlashcardsUidRoute
   '/flashcards/criarDeck': typeof FlashcardsCriarDeckRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/flashcards': typeof FlashcardsIndexRoute
+  '/flashcards/decks/$lessonId': typeof FlashcardsDecksLessonIdRoute
+  '/flashcards/decks/$uid/$deckId': typeof FlashcardsDecksUidDeckIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/chat': typeof ChatRoute
   '/login': typeof LoginRoute
+  '/flashcards/$uid': typeof FlashcardsUidRoute
   '/flashcards/criarDeck': typeof FlashcardsCriarDeckRoute
   '/lessons/$lessonId': typeof LessonsLessonIdRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/flashcards/': typeof FlashcardsIndexRoute
+  '/flashcards/decks/$lessonId': typeof FlashcardsDecksLessonIdRoute
+  '/flashcards/decks/$uid/$deckId': typeof FlashcardsDecksUidDeckIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/chat'
     | '/login'
+    | '/flashcards/$uid'
     | '/flashcards/criarDeck'
     | '/lessons/$lessonId'
     | '/dashboard'
-    | '/flashcards'
+    | '/flashcards/decks/$lessonId'
+    | '/flashcards/decks/$uid/$deckId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/chat'
     | '/login'
+    | '/flashcards/$uid'
     | '/flashcards/criarDeck'
     | '/lessons/$lessonId'
     | '/dashboard'
-    | '/flashcards'
+    | '/flashcards/decks/$lessonId'
+    | '/flashcards/decks/$uid/$deckId'
   id:
     | '__root__'
     | '/chat'
     | '/login'
+    | '/flashcards/$uid'
     | '/flashcards/criarDeck'
     | '/lessons/$lessonId'
     | '/dashboard/'
-    | '/flashcards/'
+    | '/flashcards/decks/$lessonId'
+    | '/flashcards/decks/$uid/$deckId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   LoginRoute: typeof LoginRoute
+  FlashcardsUidRoute: typeof FlashcardsUidRoute
   FlashcardsCriarDeckRoute: typeof FlashcardsCriarDeckRoute
   LessonsLessonIdRoute: typeof LessonsLessonIdRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
-  FlashcardsIndexRoute: typeof FlashcardsIndexRoute
+  FlashcardsDecksLessonIdRoute: typeof FlashcardsDecksLessonIdRoute
+  FlashcardsDecksUidDeckIdRoute: typeof FlashcardsDecksUidDeckIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -122,13 +149,6 @@ declare module '@tanstack/react-router' {
       path: '/chat'
       fullPath: '/chat'
       preLoaderRoute: typeof ChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flashcards/': {
-      id: '/flashcards/'
-      path: '/flashcards'
-      fullPath: '/flashcards'
-      preLoaderRoute: typeof FlashcardsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
@@ -152,16 +172,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FlashcardsCriarDeckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/flashcards/$uid': {
+      id: '/flashcards/$uid'
+      path: '/flashcards/$uid'
+      fullPath: '/flashcards/$uid'
+      preLoaderRoute: typeof FlashcardsUidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flashcards/decks/$lessonId': {
+      id: '/flashcards/decks/$lessonId'
+      path: '/flashcards/decks/$lessonId'
+      fullPath: '/flashcards/decks/$lessonId'
+      preLoaderRoute: typeof FlashcardsDecksLessonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flashcards/decks/$uid/$deckId': {
+      id: '/flashcards/decks/$uid/$deckId'
+      path: '/flashcards/decks/$uid/$deckId'
+      fullPath: '/flashcards/decks/$uid/$deckId'
+      preLoaderRoute: typeof FlashcardsDecksUidDeckIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   LoginRoute: LoginRoute,
+  FlashcardsUidRoute: FlashcardsUidRoute,
   FlashcardsCriarDeckRoute: FlashcardsCriarDeckRoute,
   LessonsLessonIdRoute: LessonsLessonIdRoute,
   DashboardIndexRoute: DashboardIndexRoute,
-  FlashcardsIndexRoute: FlashcardsIndexRoute,
+  FlashcardsDecksLessonIdRoute: FlashcardsDecksLessonIdRoute,
+  FlashcardsDecksUidDeckIdRoute: FlashcardsDecksUidDeckIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

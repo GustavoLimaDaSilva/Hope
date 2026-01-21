@@ -30,8 +30,8 @@ export interface LessonType extends ApiResponse {
 }
 
 export interface DecksType {
-    lesson_decks: DeckType[] | [],
-    personal_decks: DeckType[] | []
+    lesson_decks: DeckType[],
+    personal_decks: DeckType[]
 }
 
 export interface DeckType extends ApiResponse {
@@ -39,31 +39,31 @@ export interface DeckType extends ApiResponse {
     cards: FlashcardType[]
 }
 
+type linkProps = { name: string, id: string }
+export type DeckLinks = {
+
+    lessonDecksData: linkProps[],
+    personalDecksData: linkProps[]
+}
+
 export type FlashcardType = | (FlashcardTypeBase & { ImageUrl: string })
-                            | (FlashcardTypeBase & { cardFront: string })
+    | (FlashcardTypeBase & { cardFront: string })
 
 
 export const Opts = ['a', 'b', 'c', 'd'] as const
 interface FlashcardTypeBase extends ApiResponse {
-
     cardType: 'image' | 'written',
     imageFile?: FileList,
     imageUrl?: string,
     deckDescription?: string
     cardFront?: string
     options: typeof Opts,
-    correctAnswer: keyof typeof Opts | null
-}
-
-export interface ReactLessonProps {
-
-    setIndex: StateSetter<number>
-    lesson: LessonType
+    correct_answer: keyof typeof Opts | null
 }
 
 export interface TanstackRouterContext {
     getUser: () => User | null,
-    getProfileData: () => ProfileData 
+    getProfileData: () => ProfileData
 }
 
 

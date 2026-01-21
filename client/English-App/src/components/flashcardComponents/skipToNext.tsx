@@ -1,9 +1,16 @@
-import { Link } from "react-router";
-import type { StateSetter } from "../../types/react";
-import { useUserContext } from "../../RouterProvider";
-import { postNewLevel, postProfile } from "../../../utils";
+import { Link } from "@tanstack/react-router";
+import type { StateSetter } from "../../types/react.ts";
 
-export default function SkipToNext({ isCorrect, setIsCorrect, setOffset, isLastCard, callback }: { isCorrect: boolean, setIsCorrect: StateSetter<boolean | null>, setOffset: StateSetter<number>, isLastCard: boolean, callback: (() => void) | undefined }) {
+type SkipToNextProps = {
+    isCorrect: boolean | null,
+    setIsCorrect: StateSetter<boolean | null>,
+    setOffset: StateSetter<number>,
+    isLastCard: boolean,
+    updateLevel: (() => void) | undefined,
+    resetSelectedOpt: (() => void)
+}
+
+export default function SkipToNext({ isCorrect, setIsCorrect, setOffset, isLastCard, updateLevel, resetSelectedOpt }: SkipToNextProps) {
 
     return (
         <div>
@@ -12,11 +19,12 @@ export default function SkipToNext({ isCorrect, setIsCorrect, setOffset, isLastC
                 :
                 isCorrect ? 'Correto' : 'Errado'}!</p>
             {isLastCard ?
-                <Link to={'/'} onClick={callback ? callback : undefined}>Finalizar</Link>
+                <Link to={'/dashboard'} onClick={updateLevel && updateLevel()}>Finalizar</Link>
                 :
                 <button onClick={() => {
                     setOffset(prev => prev + 1)
                     setIsCorrect(null)
+                    resetSelectedOpt()
                 }}>Avançar</button>
             }
         </div>

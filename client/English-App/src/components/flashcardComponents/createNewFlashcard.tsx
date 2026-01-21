@@ -45,7 +45,6 @@ export default function CreateNewFlashcard({ setFlashcardData, cardForm, setCard
         if (setFile !== undefined && data.imageFile) {
             const safeSetFile = setFile as React.Dispatch<React.SetStateAction<File | undefined>>
             safeSetFile(data.imageFile[0])
-            console.log('here')
         }
         setFlashcardData(prev => [...prev, { ...data }])
         reset()

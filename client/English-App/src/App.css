@@ -23,7 +23,16 @@
   opacity: 1;
 }
 
-.selected {
+.flashcard-btn:focus {
+  background-color:aqua;
   border: rgb(255, 163, 178);
-background-color: green;
+}
+
+.correct {
+  
+  background-color: green;
+}
+
+.wrong {
+  background-color: red;
 }

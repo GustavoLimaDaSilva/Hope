@@ -2,24 +2,15 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState } from "react"
 import Explanation from "../../components/explanation.tsx"
 import Video from "../../components/video.tsx"
-import { useLoaderData } from "react-router"
+import { useLoaderData } from "@tanstack/react-router"
 import type { LessonType } from "../../types/react.ts"
 import Deck from "../../components/flashcardComponents/deck.tsx"
 
 export const Route = createFileRoute('/lessons/$lessonId')({
   component: Lesson,
+  loader: async ({params}) => {
 
-  validateSearch: (search) =>
-    search as {
-      userId: string
-    },
-  loaderDeps: ({ search: { lessonId } }) => ({
-    lessonId,
-  }),
-  loader: async ({ deps: { lessonId } }) => {
-
-    const raw = await fetch(`http://localhost:3000/lessons/${lessonId}`)
-
+    const raw = await fetch(`http://localhost:3000/lessons/${params.lessonId}`)
     return await raw.json()
   },
 })
@@ -30,7 +21,7 @@ export const Route = createFileRoute('/lessons/$lessonId')({
 
 export default function Lesson() {
 
-  const lesson: LessonType = useLoaderData()
+  const lesson: LessonType = useLoaderData({})
   const children = [Explanation, Video, Deck]
   const [index, setIndex] = useState(0)
   const Current = children[index]
