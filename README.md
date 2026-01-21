@@ -1,6 +1,6 @@
 ## Description
 
-This project was created with two primary goals in mind.
+This project was created with two primary goals in mind:
 
 ### 1. Learning New Technologies for More Robust Code
 
