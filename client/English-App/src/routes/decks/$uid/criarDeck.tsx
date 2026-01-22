@@ -2,14 +2,14 @@ import { createFileRoute } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { isEmpty } from "../../../utils.ts"
-import { deckSchema } from "../../schemas.ts"
+import { isEmpty } from "../../../../utils.ts"
+import { deckSchema } from "../../../schemas.ts"
 import { useNavigate } from "@tanstack/react-router"
-import type { DeckSchema, FlashcardSchema } from "../../schemas.ts"
-import { useProfileData } from "../../userStore.ts"
-import CreateNewFlashcard from "../../components/flashcardComponents/createNewFlashcard.tsx"
+import type { DeckSchema, FlashcardSchema } from "../../../schemas.ts"
+import { useProfileData } from "../../../userStore.ts"
+import CreateNewFlashcard from "../../../components/flashcardComponents/createNewFlashcard.tsx"
 
-export const Route = createFileRoute('/flashcards/criarDeck')({
+export const Route = createFileRoute('/decks/$uid/criarDeck')({
     component: CreateNewDeck,
 
 }
@@ -62,7 +62,7 @@ export default function CreateNewDeck() {
         })
 
         if (res.status === 201) {
-            navigate({to: '/flashcards'})
+            navigate({to: '..'})
         }
     }
 }

@@ -42,7 +42,7 @@ function DashBoardOverview() {
             <div>
                 {profileData.level === 1 && !toastFired ? <Toast toastFired={toastFired} className="toast" msg="agora você já pode encontrar o deck da sua lição na área de flashcards!" /> : null}
                 <p>hello </p>
-                <Link to={`/flashcards/${user.uid}`} search={{level: profileData.level}} >Ver flashcards</Link>
+                <Link to={`/decks/${user.uid}`} search={{level: profileData.level}} >Ver flashcards</Link>
                 <Link to={'/chat'}>
                     <div>
                         Converse com a nossa IA em inglês

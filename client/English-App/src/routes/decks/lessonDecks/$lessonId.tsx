@@ -1,7 +1,7 @@
 import { createFileRoute, useLoaderData } from "@tanstack/react-router";
 import Deck from "../../../components/flashcardComponents/deck.tsx";
 
-export const Route = createFileRoute('/flashcards/decks/$lessonId')({
+export const Route = createFileRoute('/decks/lessonDecks/$lessonId')({
     component: DeckLoader,
     loader: async ({ params }) => {
 

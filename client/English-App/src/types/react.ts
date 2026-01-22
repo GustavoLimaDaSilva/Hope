@@ -57,9 +57,10 @@ interface FlashcardTypeBase extends ApiResponse {
     imageUrl?: string,
     deckDescription?: string
     cardFront?: string
-    options: typeof Opts,
-    correct_answer: keyof typeof Opts | null
+    correct_answer: typeof Opts[number] | null
+    options: { [prop in typeof Opts[number]]: string },
 }
+
 
 export interface TanstackRouterContext {
     getUser: () => User | null,

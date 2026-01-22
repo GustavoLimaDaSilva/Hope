@@ -1,14 +1,14 @@
 import { useForm, useWatch, type UseFormRegister } from "react-hook-form";
 import { z } from "zod"
-import { flashcardSchema } from "../../schemas";
-import type { FlashcardSchema } from "../../schemas";
-import type { StateSetter } from "../../types/react";
+import { flashcardSchema } from "../../schemas.ts";
+import type { FlashcardSchema } from "../../schemas.ts";
+import type { StateSetter } from "../../types/react.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 
-import { Opts } from "../../types/react";
-import AnswerOption from "./answerOption";
-import useStoreFile from "../../hooks/useStoreFile";
+import { Opts } from "../../types/react.ts";
+import AnswerOption from "./answerOption.tsx";
+import useStoreFile from "../../hooks/useStoreFile.tsx";
 
 type keys = { [key: string]: string | undefined }
 export default function CreateNewFlashcard({ setFlashcardData, cardForm, setCardForm }: { setFlashcardData: StateSetter<FlashcardSchema[] | []>, cardForm: boolean, setCardForm: StateSetter<boolean> }) {
@@ -20,7 +20,7 @@ export default function CreateNewFlashcard({ setFlashcardData, cardForm, setCard
     })
     
     const { handleSubmit, control, register, reset, formState: { errors } } = form
-    const hasBeenSelected = useWatch({ name: 'correctAnswer', control })
+    const hasBeenSelected = useWatch({ name: 'correct_answer', control })
     const options = useWatch({ name: 'options', control })
 
     const optionInputs = Opts.map((o, index) => {
@@ -72,11 +72,11 @@ export default function CreateNewFlashcard({ setFlashcardData, cardForm, setCard
                         <input type="checkbox" onClick={() => setMultipleOptions(prev => !prev)} />
                         <span className="slider round"></span>
                     </label>
-                    {multipleOptions && <input type="radio" id="a" value="a" {...register('correctAnswer', { required: multipleOptions && !hasBeenSelected ? true : false })} />}
+                    {multipleOptions && <input type="radio" id="a" value="a" {...register('correct_answer', { required: multipleOptions && !hasBeenSelected ? true : false })} />}
                     <input id="back1" placeholder="escreva a parte de trás" {...register('options.a')} />
                     {errors.options?.['a']?.message && <p style={{ color: 'red' }}>{errors.options?.['a']?.message}</p>}
                     {multipleOptions && optionInputs}
-                    {errors.correctAnswer?.message && <span>{errors.correctAnswer?.message}</span>}
+                    {errors.correct_answer?.message && <span>{errors.correct_answer?.message}</span>}
                 </form>
             }
         </>

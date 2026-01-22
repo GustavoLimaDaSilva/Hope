@@ -1,6 +1,6 @@
 import { optional, z } from 'zod'
-import { minLengthParams, maxLengthParams } from '../utils'
-import type { FlashcardType, Opts } from './types/react'
+import { minLengthParams, maxLengthParams } from '../utils.ts'
+import type { FlashcardType, Opts } from './types/react.ts'
 type FlaschcardSchemaType = Record<keyof Omit<FlashcardType, 'id' | 'cardType'>, z.ZodType>
 type keys = { [key: string]: string | undefined }
 
@@ -13,6 +13,7 @@ const deckFormSchemaShape = {
   cardFront: z.string().min(1, { error: 'insira uma palavra ou frase' }),
 
   imageFile: z.instanceof(FileList).optional(),
+  imageUrl: z.string().optional(),
 
   options: z.object({
     a: z.string().min(1, { error: 'faltou aqui' }),
@@ -21,7 +22,7 @@ const deckFormSchemaShape = {
     d: z.string().min(1, { error: 'faltou aqui' }).optional()
   }),
 
-  correctAnswer: z.string()
+  correct_answer: z.string()
     .nullable()
     .optional().check(
       z.refine(option => option !== null, { error: 'selecione alguma resposta como correta' }),
@@ -38,7 +39,7 @@ export const flashcardSchema = deckFormSchema.pick({
   cardFront: true,
   options: true,
   imageFile: true,
-  correctAnswer: true
+  correct_answer: true
 })
 
 export type FlashcardSchema = z.infer<typeof flashcardSchema>

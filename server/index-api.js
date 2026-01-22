@@ -50,9 +50,9 @@ app.get('/decks/:uid', (req, res) => {
 
     const user_decks_data = []
     users.find(u => u.uid === uid)
-        .flashcard_deck.forEach(deck => {
+        .flashcard_deck?.forEach(deck => {
             user_decks_data.push({ name: deck.name, id: deck.id })
-        })
+        }) ?? []
 
     res.json({
         lessonDecksData: lesson_decks_data,
@@ -63,34 +63,77 @@ app.get('/decks/:uid', (req, res) => {
 app.get('/lessonDecks/:id', (req, res) => {
 
     const id = req.params.id
-
-   const deck = lessons.find(l => l.id === id).flashcard_deck
-
+    const deck = lessons.find(l => l.id === id).flashcard_deck
+    
     res.json(deck)
 })
 
 app.get('/personalDecks/:uid/:deckId', async (req, res) => {
-
+    
     const uid = req.params.uid
     const deckId = req.params.deckId
     const deck = users.find(u => (u.uid === uid))
-        .flashcard_deck.find(d => d.id === deckId)
-
+    .flashcard_deck.find(d => d.id === deckId)
+    
     res.json(deck)
 })
 
-app.post('/personalDecks/:id', async (req, res) => {
-
-    // const form_data = req.body?.form_data
-    // const uid = req.params.uid
-    // if (!form_data) return
-
-    // const normalizedDeck = normalizeDeckData(form_data)
-    // const success = await writePersonalDeck(normalizedDeck, uid)
-
-    // success ? res.status(201).json('Deck created successfully') : res.status(500).json('Internal Server Error')
+app.post('/personalDecks/:uid', async (req, res) => {
+    
+    const form_data = req.body?.form_data
+    const uid = req.params.uid
+    if (!form_data) return
+    
+    const normalizedDeck = normalizeDeckData(form_data)
+    const success = await writePersonalDeck(normalizedDeck, uid)
+    
+    success ? res.status(201).json('Deck created successfully') : res.status(500).json('Internal Server Error')
+    console.log(id)
     res.status(201).json('Deck created successfully')
 })
+
+function createHexId() {
+
+    return [...crypto.getRandomValues(new Uint8Array(20))].map(m=>('0'+m.toString(16)).slice(-2)).join('');
+}
+
+function normalizeDeckData(deckData) {
+
+    deckData.imageFile ? deckData.deckType = 'image' : 'written'
+
+    deckData.id = createHexId()
+
+    return deckData
+}
+
+export async function writePersonalDeck(normalizedDeck, uid) {
+
+
+
+    const userIndex = users.findIndex((d) => d.uid === uid)
+    let decks = []
+    if (userIndex >= 0) {
+        const user = users[userIndex]
+        user.flashcard_deck.push({...normalizedDeck })
+        users.splice(userIndex, 1, user)
+
+    } 
+    // else {
+    //     decks.push({...normalizedDeck })
+    //     personal_decks.push({
+    //         uid: uid,
+    //         decks: decks
+    //     })
+    // }
+    try {
+        await fs.writeFile('./data/users.json', JSON.stringify(users))
+    } catch (err) {
+        console.error('happened at writePersonalDeck: ', err)
+        throw err
+    }
+
+    return true
+}
 
 app.get('/users/:uid', (req, res) => {
 
