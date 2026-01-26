@@ -13,30 +13,29 @@ Hope is a web app aimed at teaching beginners the fundamentals of the English la
 ```bash
 git clone https://github.com/GustavoLimaDaSilva/Hope.git
 ```
-Install the dependencies:
+2. Install the dependencies:
 ```bash
 npm install
 ```
+To Contribute
 
-### To Contribute
-
-In your clone, create a feature/refactor branch, e.g.:
+1. In your clone, create a feature/refactor branch, e.g.:
 ```bash
 git checkout -b feature/foo
 ```
-Run an instance of your branch in a local development environment:
+2. Run an instance of your branch in a local development environment:
 ```bash
 npm run dev
 ```
-Commit your changes:
+3. Commit your changes:
 ```bash
 git commit -m "feat: added a new foo"
 ```
-Push to the branch:
+4. Push to the branch:
 ```bash
 git push origin feature/foo
 ```
-Create a new Pull Request.
+5. Create a new Pull Request.
 
 ### Built With
 
@@ -65,5 +64,5 @@ As a front-end developer, I do not yet have the expertise required to design and
 
 I am still looking for free and legal sources of listening content suitable for language learning.
 
-###License
+### License
 MIT © Gustavo Lima da Silva
