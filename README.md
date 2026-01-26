@@ -17,7 +17,9 @@ Install the dependencies:
 ```bash
 npm install
 ```
-To Contribute
+
+### To Contribute
+
 In your clone, create a feature/refactor branch, e.g.:
 ```bash
 git checkout -b feature/foo
@@ -36,30 +38,32 @@ git push origin feature/foo
 ```
 Create a new Pull Request.
 
-Built With
-React
+### Built With
 
-Typescript
+- React
 
-TanStack
+- Typescript
 
-Zustand
+- TanStack
 
-Express
+- Zustand
 
-Additional Dependencies
-ImageKit.io (to store and deliver images and videos)
+- Express
 
-Zod
+## Additional Dependencies
 
-React Hook Form
+- ImageKit.io (to store and deliver images and videos)
 
-Firebase API (AI and authentication)
+- Zod
 
-Challenges
+- React Hook Form
+
+- Firebase API (AI and authentication)
+
+### Challenges
 As a front-end developer, I do not yet have the expertise required to design and manage a production-ready database. For this reason, the application currently relies on JSON files as mock data.
 
 I am still looking for free and legal sources of listening content suitable for language learning.
 
-License
+###License
 MIT © Gustavo Lima da Silva
