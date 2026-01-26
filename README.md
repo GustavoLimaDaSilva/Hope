@@ -17,7 +17,7 @@ git clone https://github.com/GustavoLimaDaSilva/Hope.git
 ```bash
 npm install
 ```
-To Contribute
+## To Contribute
 
 1. In your clone, create a feature/refactor branch, e.g.:
 ```bash
@@ -37,7 +37,7 @@ git push origin feature/foo
 ```
 5. Create a new Pull Request.
 
-### Built With
+## Built With
 
 - React
 
@@ -49,7 +49,7 @@ git push origin feature/foo
 
 - Express
 
-## Additional Dependencies
+### Additional Dependencies
 
 - ImageKit.io (to store and deliver images and videos)
 
@@ -59,10 +59,14 @@ git push origin feature/foo
 
 - Firebase API (AI and authentication)
 
-### Challenges
+---
+
+## Challenges
 As a front-end developer, I do not yet have the expertise required to design and manage a production-ready database. For this reason, the application currently relies on JSON files as mock data.
 
 I am still looking for free and legal sources of listening content suitable for language learning.
 
-### License
+---
+
+## License
 MIT © Gustavo Lima da Silva
