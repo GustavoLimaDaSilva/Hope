@@ -38,6 +38,6 @@ With these shortcomings in mind, the application was designed around three core 
 
 ## License
 
-MIT License
+MIT © Gustavo Lima da Silva
 
 
