@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { StateSetter } from "../../types/react.ts";
+import type { StateSetter } from "../../types/index.ts";
 
 type SkipToNextProps = {
     isCorrect: boolean | null,

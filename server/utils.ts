@@ -1,45 +1,32 @@
-import { personal_decks } from './fileReader.js'
+import type { DeckType } from '../shared-types/API.js';
+import { users } from './fileReader.js'
+import type { ServerUser } from './types/index.js';
 const fs = await import('fs/promises')
-
 const crypto = await import('crypto')
 
-export function createHexId() {
 
-    return crypto.randomBytes(16).toString("hex")
+function createHexId() {
+
+    return [...crypto.getRandomValues(new Uint8Array(20))].map(m=>('0'+m.toString(16)).slice(-2)).join('');
 }
 
-export function normalizeDeckData(deckData: Record<string, string>) {
 
-    deckData.imageFile ? deckData.deckType = 'image' : 'written'
+export async function writePersonalDeck(deck: Omit<DeckType, 'id'>, uid: string) {
 
-    deckData.id = createHexId()
+    const userIndex : number = users.findIndex((u: ServerUser) => u.uid === uid)
 
-    return deckData
-}
-
-export async function writePersonalDeck(normalizedDeck: Record<string, string>, uid: string) {
-
-    const userIndex = personal_decks.findIndex((d: Record<string, string>) => d.uid === uid)
-    let decks = []
-    if (userIndex >= 0) {
-        const user = personal_decks[userIndex]
-        user.decks.push({...normalizedDeck })
-        personal_decks.splice(userIndex, 1, user)
-
+    if (userIndex >= 0 && users[userIndex]?.flashcard_decks) {
+        const user = users[userIndex]
+        user.flashcard_decks.push({...deck, id: createHexId()})
+        users.splice(userIndex, 1, user)
     } 
-    else {
-        decks.push({...normalizedDeck })
-        personal_decks.push({
-            uid: uid,
-            decks: decks
-        })
-    }
+   
     try {
-        await fs.writeFile('personalDecks.json', JSON.stringify(personal_decks))
+        await fs.writeFile('./data/users.json', JSON.stringify(users))
     } catch (err) {
         console.error('happened at writePersonalDeck: ', err)
         throw err
     }
-
     return true
 }
+

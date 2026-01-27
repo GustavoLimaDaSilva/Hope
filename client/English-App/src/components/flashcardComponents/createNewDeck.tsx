@@ -47,7 +47,7 @@ export default function CreateNewDeck() {
 
         if (flashcardData.length === 0) return
 
-        const res = await fetch(`http://localhost:3000/personalDecks/${profileData.uid}`, {
+        const res = await fetch(`http://localhost:3000/decks/personalDecks/${profileData.uid}`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

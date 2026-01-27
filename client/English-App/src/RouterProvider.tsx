@@ -7,7 +7,7 @@ import FlashCardsOverview from './components/flashcardComponents/flashCardsOverv
 import Deck from './components/flashcardComponents/deck.tsx'
 import Lesson from './components/Lesson.tsx'
 import { useState, createContext, useContext } from 'react'
-import type { LessonType, ProfileData, StateSetter } from './types/react.ts';
+import type { LessonType, ProfileData, StateSetter } from './types/index.ts';
 import type { User } from 'firebase/auth'
 import Explanation from './components/explanation.tsx'
 import Video from './components/video.tsx'

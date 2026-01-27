@@ -2,11 +2,11 @@ import { useForm, useWatch, type UseFormRegister } from "react-hook-form";
 import { z } from "zod"
 import { flashcardSchema } from "../../schemas.ts";
 import type { FlashcardSchema } from "../../schemas.ts";
-import type { StateSetter } from "../../types/react.ts";
+import type { StateSetter } from "../../types/index.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 
-import { Opts } from "../../types/react.ts";
+import { Opts } from "../../../../../shared-types/API.ts";
 import AnswerOption from "./answerOption.tsx";
 import useStoreFile from "../../hooks/useStoreFile.tsx";
 

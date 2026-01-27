@@ -5,7 +5,7 @@ export const Route = createFileRoute('/decks/$uid/$deckId')({
     component: DeckLoader,
     loader: async ({ params }) => {
         debugger
-        const raw = await fetch(`http://localhost:3000/personalDecks/${params.uid}/${params.deckId}`)
+        const raw = await fetch(`http://localhost:3000/decks/personalDecks/${params.uid}/${params.deckId}`)
         return await raw.json()
     }
 })

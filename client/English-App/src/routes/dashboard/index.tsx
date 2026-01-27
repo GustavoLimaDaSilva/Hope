@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "@tanstack/react-router"
-import type { LessonType, ProfileData } from "../../types/react.ts"
+import type { LessonType, ProfileData } from "../../../../../shared-types/API.ts"
 import { isEmpty } from "../../../utils.ts"
 import Toast from "../../components/toast.tsx"
 import DashboardLogic from "../../components/dashboardLogic.tsx"

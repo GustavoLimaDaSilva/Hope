@@ -1,6 +1,6 @@
 import type { User } from 'firebase/auth'
 import { create } from 'zustand'
-import type { ProfileData } from './types/react.js'
+import type { ProfileData } from './types/index.ts'
 
 type UseGoogleUser = {
     googleUser: null | User,

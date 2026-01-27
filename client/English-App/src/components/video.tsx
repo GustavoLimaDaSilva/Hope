@@ -1,4 +1,4 @@
-import type {  ReactLessonProps } from "../types/react.ts"
+import type {  ReactLessonProps } from "../types/index.ts"
 import useFormatText from "../hooks/useFormatText.tsx"
 import { speak } from '../../utils.ts'
 export default function Video({setIndex, lesson}: ReactLessonProps) {

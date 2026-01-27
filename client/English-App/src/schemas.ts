@@ -1,14 +1,14 @@
-import { optional, z } from 'zod'
+import { z } from 'zod'
 import { minLengthParams, maxLengthParams } from '../utils.ts'
-import type { FlashcardType, Opts } from './types/react.ts'
-type FlaschcardSchemaType = Record<keyof Omit<FlashcardType, 'id' | 'cardType'>, z.ZodType>
+import type { DeckType, FlashcardType, Opts } from './types/index.ts'
+type FlaschcardSchemaType = Record<keyof Omit<FlashcardType, 'id' | 'cardType'>, z.ZodType> & Record<keyof Pick<DeckType, 'deckDescription'>, z.ZodNullable<z.ZodString>>;
 type keys = { [key: string]: string | undefined }
 
 const deckFormSchemaShape = {
   name: z.string()
     .check(z.minLength(...minLengthParams()), z.maxLength(...maxLengthParams(40))),
 
-  deckDescription: z.string().optional(),
+  deckDescription: z.string().nullable(),
 
   cardFront: z.string().min(1, { error: 'insira uma palavra ou frase' }),
 

@@ -1,4 +1,4 @@
-import type { FlashcardType, Opts, StateSetter } from "../../types/react.ts";
+import type { FlashcardType } from "../../types/index.ts";
 
 type flashcardProps = {
     card: FlashcardType | undefined,
@@ -10,7 +10,7 @@ type flashcardProps = {
 export default function Flashcard({ card, selectedOption, isCorrect, isMultipleOption }: flashcardProps) {
 
     if (!card) return
-    console.log(card)
+
     return (
         <>
             {card.cardFront && <p>{card.cardFront}</p> }

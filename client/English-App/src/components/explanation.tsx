@@ -1,7 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
-import type { ReactLessonProps } from "../types/react.tsx";
+import type { ReactLessonProps } from "../types/index.ts";
 import useFormatText from "../hooks/useFormatText.tsx";
-import type { StateSetter } from "../types/react.ts";
+import type { StateSetter } from "../types/index.ts";
 
 export default function Explanation({ setIndex, lesson }: ReactLessonProps) {
 

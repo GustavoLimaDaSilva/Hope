@@ -11,7 +11,7 @@ import type { StateSetter } from "../types/react";
 export default function useStoreFile<T>(dataSetter: StateSetter<T[] | []>) {
 
     const [fileUrl, setFileUrl] = useState<string | undefined>();
-    const [file, setFile] = useState<File | undefined>()
+    const [file, setFile] = useState<File | {}>()
     const abortController = new AbortController()
 
     useEffect(() => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useProfileData } from "../../userStore.ts"
-import type { DeckType, LessonType, StateSetter } from "../../types/react.ts"
+import type { StateSetter } from "../../types/index.ts"
+import type { LessonType, DeckType } from "../../../../../shared-types/API.ts"
 import Flashcard from "./flashcard.tsx"
 import SkipToNext from "./skipToNext.tsx"
 
@@ -20,7 +21,6 @@ export default function Deck({ setIndex, lesson, loaderDeck }: DeckProps) {
     const [selectedOption, setSelectedOption] = useState<HTMLButtonElement | null>(null)
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
     const [cards, setCards] = useState(lesson?.flashcard_deck.cards ?? loaderDeck!.cards)
-
     const isMultipleOption = cards[offset]?.options ? Object.keys(cards[offset]?.options).length > 1 : false
 
     const updatelevel = () => localStorage.setItem('new_level', JSON.stringify(profileData.level + 1))
