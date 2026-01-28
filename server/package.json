@@ -1,11 +1,11 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "./dist/server/index-api.js",
+  "main": "./dist/index-api.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./dist/server/index-api.js"
+    "dev": "nodemon ./dist/index-api.js"
   },
   "keywords": [],
   "author": "",
