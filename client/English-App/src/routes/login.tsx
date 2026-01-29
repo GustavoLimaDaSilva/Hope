@@ -5,9 +5,9 @@ import { auth } from '../../firebaseConfig.ts'
 import { useGoogleUser } from '../userStore.ts'
 
 export const Route = createFileRoute('/login')({
-component: loginn})
+component: Login})
 
-function loginn() {
+function Login() {
 
     const setUser = useGoogleUser((state) => state.setGoogleUser)
 
