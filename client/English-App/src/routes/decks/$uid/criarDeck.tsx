@@ -3,11 +3,13 @@ import { useEffect, useState } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { isEmpty } from "../../../../utils.ts"
-import { deckSchema } from "../../../schemas.ts"
+import { deckSchema } from "../../../schemas/deckForm.ts"
 import { useNavigate } from "@tanstack/react-router"
-import type { DeckSchema, FlashcardSchema } from "../../../schemas.ts"
+import type { DeckSchema, FlashcardSchema } from "../../../schemas/deckForm.ts"
 import { useProfileData } from "../../../userStore.ts"
 import CreateNewFlashcard from "../../../components/flashcardComponents/createNewFlashcard.tsx"
+import type z from "zod"
+import type { decksSearchSchema } from "../../../schemas/searchParams.ts"
 
 export const Route = createFileRoute('/decks/$uid/criarDeck')({
     component: CreateNewDeck,
@@ -17,7 +19,7 @@ export const Route = createFileRoute('/decks/$uid/criarDeck')({
 
 export default function CreateNewDeck() {
 
-   const profileData = useProfileData((state) => state.profileData)
+    const profileData = useProfileData((state) => state.profileData)
     const [flashcardData, setFlashcardData] = useState<FlashcardSchema[]>([])
     const [cardForm, setCardForm] = useState(false)
     const navigate = useNavigate()
@@ -62,7 +64,10 @@ export default function CreateNewDeck() {
         })
 
         if (res.status === 201) {
-            navigate({to: '..'})
+            navigate({
+                to: '..',
+                search: () => ({ level: profileData.level } satisfies z.infer<typeof decksSearchSchema>)
+            })
         }
     }
 }

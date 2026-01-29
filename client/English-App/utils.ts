@@ -1,5 +1,5 @@
 import type { User } from "firebase/auth"
-import type { ProfileData } from "./src/types/react.ts"
+import type { ProfileData } from "../../shared-types/API.ts"
 let LengthParamsTurple: [number, {error: string}]
 
 export function streamTextEffect(text: string) {
@@ -24,7 +24,7 @@ export function isEmpty<T extends object>(obj: T): obj is T & Record<string, unk
 }
 
 export async function postProfile(profileData: ProfileData | {}) {
-    
+
     if (isEmpty(profileData)) return
 
     await fetch(`http://localhost:3000/users`, {

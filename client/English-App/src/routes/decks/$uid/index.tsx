@@ -1,17 +1,15 @@
 import { Link, createFileRoute, useLoaderData, useParams } from "@tanstack/react-router"
 import type { DeckLinks } from "../../../types/index.ts"
 import { useGoogleUser, useProfileData } from "../../../userStore.ts";
+import { decksSearchSchema } from "../../../schemas/searchParams.ts";
 
 export const Route = createFileRoute('/decks/$uid/')({
     component: FlashcardsIndex,
-    validateSearch: (search) => {
-        search as {
-            level: number
-        }
-    },
+    validateSearch: decksSearchSchema,
     loaderDeps: ({ search: { level } }) => ({
         level //adicionar validação com zod
     }),
+    errorComponent: () => <div>this is a custom error component</div>,
     loader: async ({ params, deps: { level } }) => {
 
         if (level === undefined || level === null) return

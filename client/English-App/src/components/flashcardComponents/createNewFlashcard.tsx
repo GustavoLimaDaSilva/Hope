@@ -1,7 +1,7 @@
 import { useForm, useWatch, type UseFormRegister } from "react-hook-form";
 import { z } from "zod"
-import { flashcardSchema } from "../../schemas.ts";
-import type { FlashcardSchema } from "../../schemas.ts";
+import { flashcardSchema } from "../../schemas/deckForm.ts";
+import type { FlashcardSchema } from "../../schemas/deckForm.ts";
 import type { StateSetter } from "../../types/index.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";

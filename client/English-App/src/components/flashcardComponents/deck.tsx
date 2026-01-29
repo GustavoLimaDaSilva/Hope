@@ -25,7 +25,6 @@ export default function Deck({ setIndex, lesson, loaderDeck }: DeckProps) {
 
     const updatelevel = () => localStorage.setItem('new_level', JSON.stringify(profileData.level + 1))
 
-
     useEffect(() => {
 
         if (cards[offset] && isCorrect === false) {

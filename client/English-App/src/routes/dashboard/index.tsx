@@ -5,6 +5,9 @@ import Toast from "../../components/toast.tsx"
 import DashboardLogic from "../../components/dashboardLogic.tsx"
 import { createFileRoute } from "@tanstack/react-router"
 import { useGoogleUser, useProfileData } from "../../userStore.ts"
+import type { DeckSchema } from "../../schemas/deckForm.ts"
+import type z from "zod"
+import type { decksSearchSchema } from "../../schemas/searchParams.ts"
 
 export const Route = createFileRoute('/dashboard/')({
     component: DashBoardOverview,
@@ -42,7 +45,7 @@ function DashBoardOverview() {
             <div>
                 {profileData.level === 1 && !toastFired ? <Toast toastFired={toastFired} className="toast" msg="agora você já pode encontrar o deck da sua lição na área de flashcards!" /> : null}
                 <p>hello </p>
-                <Link to={`/decks/${user.uid}`} search={{level: profileData.level}} >Ver flashcards</Link>
+                <Link to={`/decks/${user.uid}`} search={{level: profileData.level} satisfies z.infer<typeof decksSearchSchema>} >Ver flashcards</Link>
                 <Link to={'/chat'}>
                     <div>
                         Converse com a nossa IA em inglês

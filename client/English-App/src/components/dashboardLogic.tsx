@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLoaderData } from "react-router";
 import { isEmpty, postNewLevel, postProfile } from "../../utils.ts";
-import type { ProfileData } from "../types/react.ts";
+import type { ProfileData } from "../../../../shared-types/API.ts";
 import { useGoogleUser, useProfileData } from "../userStore.ts";
 
 export default function DashboardLogic({children, storedProfile} : {children: React.ReactNode, storedProfile: ProfileData | {}}) {
@@ -16,9 +16,11 @@ export default function DashboardLogic({children, storedProfile} : {children: Re
     }, [])
 
     const data = localStorage.getItem('new_level')
+
     const newLevel: number | null =
         data !== null ? JSON.parse(data) : null
 
+        console.log('new level from local storage: ', newLevel)
     useEffect(() => {
         if (!newLevel) return
 
