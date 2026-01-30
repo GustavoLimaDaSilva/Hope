@@ -17,11 +17,12 @@ export async function writePersonalDeck(deck: Omit<DeckType, 'id'>, uid: string)
     const user = users[userIndex]
 
     if (user) {
-
+        const newDeck = { ...deck, id: createHexId()} satisfies DeckType
+        
         user.flashcard_decks ?
-            user.flashcard_decks.push({ ...deck, id: createHexId() })
+            user.flashcard_decks.push(newDeck)
             :
-            user.flashcard_decks = [{ ...deck, id: createHexId() }]
+            user.flashcard_decks = [newDeck]
         users.splice(userIndex, 1, user)
     }
 
