@@ -26,21 +26,24 @@ export interface DecksType {
 }
 
 export interface DeckType extends ApiResponse {
-    
-    deckDescription: string | null,
-    cards: FlashcardType[]
+
+    deckDescription?: string,
+    cards: FlashcardType[] | SingleOptionCard[]
 }
 
-export type FlashcardType = | (FlashcardTypeBase & { ImageUrl: string })
-    | (FlashcardTypeBase & { cardFront: string })
+export interface SingleOptionCard extends FlashcardType {
+
+    difficulty?: 'easy' | 'medium' | 'hard' | undefined,
+    addedAt: number
+} 
 
 
 export const Opts = ['a', 'b', 'c', 'd'] as const
-interface FlashcardTypeBase {
+export interface FlashcardType {
     cardType: 'image' | 'written',
-    imageFile?: FileList | {},
-    imageUrl?: string,
-    cardFront?: string
-    correct_answer?: typeof Opts[number]
+    imageFile?: FileList | {} | undefined,
+    imageUrl?: string | undefined,
+    cardFront: string
+    correct_answer?: typeof Opts[number] | undefined
     options: { [prop in typeof Opts[number]]: string },
 }

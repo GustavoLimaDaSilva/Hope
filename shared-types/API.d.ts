@@ -18,21 +18,20 @@ export interface DecksType {
     personal_decks: DeckType[];
 }
 export interface DeckType extends ApiResponse {
-    deckDescription: string | null;
-    cards: FlashcardType[];
+    deckDescription?: string;
+    cards: FlashcardType[] | SingleOptionCard[];
 }
-export type FlashcardType = (FlashcardTypeBase & {
-    ImageUrl: string;
-}) | (FlashcardTypeBase & {
-    cardFront: string;
-});
+export interface SingleOptionCard extends FlashcardType {
+    difficulty?: 'easy' | 'medium' | 'hard' | undefined;
+    addedAt: number;
+} 
 export declare const Opts: readonly ["a", "b", "c", "d"];
-interface FlashcardTypeBase {
+export interface FlashcardType {
     cardType: 'image' | 'written';
-    imageFile?: FileList | {};
-    imageUrl?: string;
-    cardFront?: string;
-    correct_answer?: typeof Opts[number];
+    imageFile?: FileList | {} | undefined;
+    imageUrl?: string | undefined;
+    cardFront: string;
+    correct_answer?: typeof Opts[number] | undefined;
     options: {
         [prop in typeof Opts[number]]: string;
     };
