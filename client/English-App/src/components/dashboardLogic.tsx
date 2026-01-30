@@ -3,8 +3,9 @@ import { Outlet, useLoaderData } from "react-router";
 import { isEmpty, postNewLevel, postProfile } from "../../utils.ts";
 import type { ProfileData } from "../../../../shared-types/API.ts";
 import { useGoogleUser, useProfileData } from "../userStore.ts";
+import { isObjEmpty } from "../../../../typeGuards.ts";
 
-export default function DashboardLogic({children, storedProfile} : {children: React.ReactNode, storedProfile: ProfileData | {}}) {
+export default function DashboardLogic({ children, storedProfile }: { children: React.ReactNode, storedProfile: ProfileData | {} }) {
 
     const user = useGoogleUser((state) => state.googleUser)
     const profileData = useProfileData((state) => state.profileData)
@@ -20,13 +21,12 @@ export default function DashboardLogic({children, storedProfile} : {children: Re
     const newLevel: number | null =
         data !== null ? JSON.parse(data) : null
 
-        console.log('new level from local storage: ', newLevel)
     useEffect(() => {
         if (!newLevel) return
 
         if (newLevel > profileData.level) {
 
-            setProfileData({uid: profileData.uid, level: newLevel})
+            setProfileData({ uid: profileData.uid, level: newLevel })
             postNewLevel({ uid: profileData.uid, level: newLevel })
         }
         localStorage.removeItem('new_level')
@@ -44,13 +44,13 @@ export default function DashboardLogic({children, storedProfile} : {children: Re
 
         const newProfile = { uid: user!.uid, level: 0 }
 
-        if (!storedProfile || user!.uid !== (storedProfile as ProfileData).uid) {
+        if (isObjEmpty(storedProfile) || user!.uid !== (storedProfile as ProfileData).uid) {
 
             setProfileData(newProfile)
             await postProfile(newProfile)
             return
         }
 
-       if (storedProfile) setProfileData(storedProfile as ProfileData)
+        if (storedProfile) setProfileData(storedProfile as ProfileData)
     }
 }
