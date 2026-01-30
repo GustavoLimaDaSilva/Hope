@@ -4,13 +4,13 @@ import type { StateSetter } from "../../types/index.ts";
 type SkipToNextProps = {
     isCorrect: boolean | null,
     setIsCorrect: StateSetter<boolean | null>,
-    setOffset: StateSetter<number>,
-    isLastCard: boolean,
+    skipToNext: (() => void) | undefined,
     updateLevel: (() => void) | undefined,
+    isLastCard: boolean,
     resetSelectedOpt: (() => void)
 }
 
-export default function SkipToNext({ isCorrect, setIsCorrect, setOffset, isLastCard, updateLevel, resetSelectedOpt }: SkipToNextProps) {
+export default function SkipToNext({ isCorrect, setIsCorrect, skipToNext, isLastCard, updateLevel, resetSelectedOpt }: SkipToNextProps) {
 
     return (
         <div>
@@ -22,7 +22,7 @@ export default function SkipToNext({ isCorrect, setIsCorrect, setOffset, isLastC
                 <Link to={'/dashboard'} onClick={updateLevel && updateLevel()}>Finalizar</Link>
                 :
                 <button onClick={() => {
-                    setOffset(prev => prev + 1)
+                    if (skipToNext) skipToNext()
                     setIsCorrect(null)
                     resetSelectedOpt()
                 }}>Avançar</button>
