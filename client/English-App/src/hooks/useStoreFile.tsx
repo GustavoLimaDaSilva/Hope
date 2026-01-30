@@ -77,7 +77,7 @@ async function authenticator() {
     try {
 
         const response = await fetch("http://localhost:3000/auth/imageKit");
-        // debugger
+
         if (!response.ok) {
 
             const errorText = await response.text();
