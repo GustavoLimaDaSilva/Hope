@@ -1,6 +1,7 @@
 :root {
   --AI-msg-width: unset;
   --average-card-width: clamp(200px, 20%, 700px);
+  --card-has-background-width: clamp(210px, 35vw, 450px);
   --nav-z-index: 10;
   --unavailability-z-index: 50;
   --login-margin-top: 3rem;
@@ -276,8 +277,9 @@ button:disabled {
 }
 
 .nav {
+  width: 100%;
   background-color: var(--light-contrast);
-  padding: 2em;
+  padding-block: 2em;
   box-shadow: var(--frutiger-shadow);
   position: relative;
   z-index: var(--nav-z-index);
@@ -289,17 +291,22 @@ button:disabled {
   align-items: center;
 }
 
+.nav > ul * {
+    font-size: clamp(.7rem, 1.2vw, 2rem);
+}
+
 .nav li {
   list-style: none;
+  margin-inline: 1.5vw;
+  padding-inline: .5em;
   display: inline-block;
-  margin-inline: 2vw;
 }
 
 nav .profile-area {
   display: flex;
   min-width: 10vw;
   align-items: center;
-  margin-inline: auto calc(2vw + 2em);
+  margin-inline: auto 1.5vw;
   padding: 0;
   position: relative;
 }
@@ -359,7 +366,7 @@ nav .profile-area {
 
 .level-display {
   margin: 0;
-  padding: .5em 3em;
+  padding: .5em clamp(2em,3em, 4vw);
   border-radius: 10px;
   background-color: rgb(205, 205, 205);
   box-shadow: 0 0 3px 2px #686868 inset;
@@ -552,11 +559,11 @@ small {
 
 .main {
   display: grid;
-  grid-template-columns: repeat(2, 50vh);
-  grid-template-rows: 33vh 33vh;
+  grid-template-columns: repeat(2, 45vw);
+  grid-template-rows: 25vh auto;
   justify-content: center;
-  padding: 10vh 15vw;
-  gap: 3vw;
+  padding-top: 5vh;
+  row-gap: 10vh;
   height: 100vh;
   overflow: hidden;
   position: relative;
@@ -802,15 +809,17 @@ small {
 }
 
 .has-background {
+  margin: auto;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   aspect-ratio: 4/2;
-  width: 100%;
+  width: var(--card-has-background-width);
 }
 
 .has-background a {
   color: var(--light-contrast);
+  font-size: clamp(.7rem, 1.5vw, 1.7rem);
 }
 
 .has-background:before {
@@ -833,6 +842,7 @@ small {
   height: 33vh;
   padding-block: 0;
   position: relative;
+  margin-inline: 5vw;
 }
 
 
@@ -1433,6 +1443,23 @@ label:has(.switch) {
     grid-template-columns: 42.5vw 42.5vw;
     column-gap: 5vw;
     padding-inline: 5vw;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .main {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20vh 20vh 60vh;
+    row-gap: 1vh;
+  }
+
+  .has-background {
+    width: calc(var(--card-has-background-width) + 7vw);
+  }
+
+  .lessons-container {
+    grid-column: 1;
   }
 }
 
