@@ -20,7 +20,6 @@ export default function CreateNewFlashcard({ setFlashcardData, cardForm, setCard
     const { handleSubmit, control, register, reset, formState: { errors } } = form
     const hasBeenSelected = useWatch({ name: 'correctAnswer', control })
     const options = useWatch({ name: 'options', control })
-    const imageFile = useWatch({ name: "imageFile", control })
     
     const optionInputs = Opts.map((o, index) => {
 
@@ -54,29 +53,23 @@ export default function CreateNewFlashcard({ setFlashcardData, cardForm, setCard
             <form onSubmit={handleSubmit(setData)} id="cardForm" className={cardForm ? "translate-right flashcard-form" : "flashcard-form"}>
                 <h2>Flashcards</h2>
                 <label htmlFor="front">Parte da frente</label>
-                <br />
-                <input id="front" placeholder="escreva a parte da frente" {...register('cardFront')} />
+                <input id="front" placeholder="escreva a parte da frente" className="deck-form-input" {...register('cardFront')} />
                 {errors.cardFront?.message && <p className="form-error">{errors.cardFront?.message}</p>}
-                <br />
                 <label htmlFor="image">Coloque uma imagem <small>(fortemente recomendado)</small></label>
-                <br />
                 <input type="file" id="image" placeholder="uma imagem" {...register('imageFile')} />
-                <br />
                 {!multipleOptions &&
                     <>
                         <label htmlFor="back1">Parte de trás</label>
-                        <br />
-                        <input id="back1" placeholder="escreva a parte de trás" {...register('options.a')} />
+                        <input id="back1" placeholder="escreva a parte de trás" className="deck-form-input" {...register('options.a')} />
                         {errors.options?.['a']?.message && <p className="form-error">{errors.options?.['a']?.message}</p>}
                     </>
                 }
-                <label>modo mútipla escolha
+                <label className="switch-label">modo mútipla escolha
                     <div className={multipleOptions ? "switch turn-on-background" : "switch"} onClick={() => setMultipleOptions(prev => !prev)}>
                         <span className={multipleOptions ? "slider turn-on" : "slider"}></span>
                     </div>
                     <input type="checkbox" />
                 </label>
-                {/* {multipleOptions && <input type="radio" id="a" value="a" {...register('correctAnswer', { required: multipleOptions && !hasBeenSelected ? true : false })} />} */}
                 <div className="opts-wrapper">
                     {multipleOptions && optionInputs}
                 </div>

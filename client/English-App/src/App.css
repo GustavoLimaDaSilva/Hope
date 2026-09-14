@@ -1,6 +1,7 @@
 :root {
   --AI-msg-width: unset;
   --average-card-width: clamp(200px, 20%, 700px);
+  --average-font-size: clamp(.7rem, 1.2vw, 2rem);
   --card-has-background-width: clamp(210px, 35vw, 450px);
   --nav-z-index: 10;
   --unavailability-z-index: 50;
@@ -66,6 +67,7 @@ ul {
 
 label {
   display: inline-block;
+  margin-block: 1em .5em
 }
 
 input {
@@ -133,8 +135,8 @@ input[type=file] {
 
 
 .opts-wrapper:has(.option) {
-  width: 100%;
-  margin-bottom: 10vh;
+  margin-block: .15vh;
+padding: 0;
 }
 
 .option {
@@ -143,8 +145,7 @@ input[type=file] {
 }
 
 .option-upper {
-  display: flex;
-  align-items: start;
+  font-size: var(--form-average-font-size);
   white-space: nowrap;
   margin-bottom: .2em;
 }
@@ -292,7 +293,7 @@ button:disabled {
 }
 
 .nav > ul * {
-    font-size: clamp(.7rem, 1.2vw, 2rem);
+    font-size: var(--average-font-size);
 }
 
 .nav li {
@@ -562,7 +563,7 @@ small {
   grid-template-columns: repeat(2, 45vw);
   grid-template-rows: 25vh auto;
   justify-content: center;
-  padding-top: 5vh;
+  padding-top: 13vh;
   row-gap: 10vh;
   height: 100vh;
   overflow: hidden;
@@ -950,7 +951,7 @@ li {
 
 .lesson>a>img {
   width: 10%;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .user-msg {
@@ -1006,9 +1007,12 @@ i:has(.english-word) {
 
 
 .flashcard {
-  position: relative;
+  position: absolute;
   background-color: var(--light-contrast);
-  margin: 15vh auto;
+  /* margin: cqh auto; */
+  left: 50%;
+  top:45%;
+  translate: -50% -50%;
   padding-inline: 1em;
   border-radius: 10px;
   box-shadow: var(--frutiger-shadow);
@@ -1018,20 +1022,23 @@ i:has(.english-word) {
 
 
 .form-wrapper {
+  --bottom: 5rem;
+  --absolute-bottom: calc(var(--bottom) / 2);
   position: absolute;
   inset: 0;
   align-content: center;
 }
 
 .form-wrapper form {
+  --form-average-font-size: calc(var(--average-font-size) - .1rem);
+  --form-input-padding: clamp(.1rem, 1vw, 1em);
   margin-inline: auto;
+  margin-bottom: var(--bottom);
   background-color: var(--light-contrast);
-  min-height: fit-content;
-  height: 60vh;
-  width: 30vw;
+  min-height: 50vh;
+  width: clamp(190px, 30vw, 500px);
   padding: 2em 2em 0 2em;
   box-shadow: var(--frutiger-shadow);
-  display: flex;
   flex-direction: column;
   border-radius: 10px;
   transition: .8s transform ease-in-out;
@@ -1040,6 +1047,12 @@ i:has(.english-word) {
 .deck-form h1,
 .flashcard-form h2 {
   margin-block: 0 1rem;
+  font-size: calc(var(--average-font-size) + .2rem);
+}
+
+.form-wrapper form :is(label, p, small){
+
+  font-size: var(--form-average-font-size);
 }
 
 .card-count {
@@ -1051,17 +1064,45 @@ i:has(.english-word) {
   z-index: 1;
 }
 
+.deck-form label {
+  margin-block: 0 1em;
+}
+
+.deck-form .deck-form-input:first-of-type {
+margin-bottom: 2em;
+}
+
 .flashcard-form {
   z-index: 0;
   position: absolute;
-  top: 50%;
+  top: calc(50% - var(--absolute-bottom));
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
+.deck-form-input {
+  padding: var(--form-input-padding);
+  font-size: clamp(.6rem, 1vw, 2rem);
+  width: 80%;
+}
+
+.option .deck-form-input {
+  padding-block: 1cqh;
+  width: 85%;
+}
+
+input[type=file] {
+  padding: clamp(.1rem, 1vw, 1em);
+  font-size: clamp(.6rem, 1vw, 2rem);
+}
+
+.flashcard-form > .deck-form-input:last-of-type {
+  margin-bottom: 1em;
+}
+
 .bottom-btn {
   width: 100%;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   left: 0;
   border-radius: inherit;
@@ -1077,12 +1118,21 @@ i:has(.english-word) {
   transform: translateX(-20vw);
 }
 
+
 .align-buttons {
   flex-grow: 1;
   display: flex;
   align-items: center;
+  padding-bottom: 1em;
 }
 
+.deck-form .align-buttons {
+    margin-top: 28%;
+}
+
+.deck-form .align-buttons button {
+  font-size: var(--form-average-font-size);
+}
 
 .align-buttons button:last-child {
   margin-left: auto;
@@ -1093,24 +1143,27 @@ i:has(.english-word) {
   transform: translate(0%, -50%);
 }
 
-label:has(.switch) {
-  display: flex;
+.switch-label {
+display: flex;
   width: 100%;
   align-items: center;
   flex-wrap: wrap;
-  margin: 0;
-  height: fit-content;
-  padding-top: 1em;
+  margin-bottom: 1rem;
 }
 
+.switch-label:has(+ .opts-wrapper > .option) {
+margin: 0;
+} 
+
 .switch {
+  --switch-width: 4cqw;
   position: relative;
   display: inline-block;
   gap: 20%;
   background-color: rgb(156, 155, 155);
   border-radius: 20px;
-  height: 40px;
-  width: 80px;
+  height: calc(var(--switch-width) / 2);
+  width: var(--switch-width);
   cursor: pointer;
   margin-left: auto;
 }
@@ -1197,9 +1250,9 @@ label:has(.switch) {
 
 .opts-wrapper {
   display: grid;
-  grid-template-columns: 40% 40%;
+  grid-template-columns: 1fr 1fr;
   padding-inline: var(--flashcard-children-bm);
-  gap: calc(var(--flashcard-children-bm) / 2) 5%;
+  column-gap: 10%;
 }
 
 .flashcard-opts-wrapper {
@@ -1319,7 +1372,7 @@ label:has(.switch) {
   background-color: var(--light-contrast);
   box-shadow: var(--frutiger-shadow);
   border-radius: 10px;
-  width: min(93.75vw, 40ch);
+  width: clamp(25ch, 50vw, 400px);
   min-height: 60vh;
   height: fit-content;
   padding-inline: 1em;
@@ -1328,6 +1381,7 @@ label:has(.switch) {
   margin-top: -6vh;
   display: grid;
   grid-template-rows: minmax(60%, auto) 17%;
+  grid-template-columns: 100%;
   position: absolute;
   inset: 20vh 0;
   opacity: 0;
@@ -1355,9 +1409,12 @@ label:has(.switch) {
 .video-frame {
   border-radius: 10px;
   height: 90%;
-  margin-inline: auto;
-  margin-block: auto;
+  width: 100%;
+  margin: auto;
+  grid-column: 1/2;
 }
+
+
 
 .chat-wrapper {
   height: 100vh;
@@ -1436,6 +1493,46 @@ label:has(.switch) {
 .reload:hover {
   scale: 1.1;
   color: var(--lighter-accent-color)
+}
+
+@media screen and (max-width: 795px) {
+
+  .grandient-background:has(form) {
+     height: 80vh;
+  overflow-y: auto;
+  }
+
+  .form-wrapper {
+  display: flex;
+  flex-flow: column;
+align-items: center;  
+gap: 5vh;
+height: 80vh;
+min-height: 0;
+padding-top: 5vh;
+}
+
+.form-wrapper form {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0;
+  transform: initial;
+  position: relative;
+  min-height: fit-content;
+}
+
+.form-wrapper .flashcard-form {
+  padding-bottom: .5rem;
+  position: relative;
+}
+
+.opts-wrapper:has(.option) {
+display: flex;
+flex-direction: column;
+padding: 0;
+}
 }
 
 @media screen and (max-width: 580px) {

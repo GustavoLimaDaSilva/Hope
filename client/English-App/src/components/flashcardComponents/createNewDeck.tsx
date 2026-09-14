@@ -25,12 +25,9 @@ export default function CreateNewDeck() {
             <p>{flashcardData.length} cartões</p>
             <form id="form" onSubmit={handleSubmit(postPersonalDeck)}>
                 <label htmlFor="name">Nome do deck</label>
-                <br />
                 <input type="text" id="name" placeholder="coloque um nome" {...register("name")} />
                 {errors.name?.message && <p style={{ color: 'red' }}>{errors.name?.message}</p>}
-                <br />
                 <label htmlFor="descrição">Descrição (opcional)</label>
-                <br />
                 <input type="text" id="descrição" placeholder="coloque uma descrição"  {...register("deckDescription", { required: hasInput ? true : false })} />
                 <br />
                 <button onClick={() => setCardForm(true)} form="cardForm">adicionar cartão</button>

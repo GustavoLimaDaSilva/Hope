@@ -35,12 +35,12 @@ export default function CreateNewDeck() {
                 <p className="card-count">{rightPhraseCartao(flashcardData.length)}</p>
                 <label htmlFor="name">Nome do deck</label>
                 <br />
-                <input type="text" id="name" placeholder="coloque um nome" {...register("name")} />
+                <input type="text" id="name" placeholder="coloque um nome" className="deck-form-input" {...register("name")} />
                 {errors.name?.message && <p style={{ color: 'red' }}>{errors.name?.message}</p>}
                 <br />
                 <label htmlFor="descrição">Descrição (opcional)</label>
                 <br />
-                <input type="text" id="descrição" placeholder="coloque uma descrição"  {...register("deckDescription", { required: hasInput ? true : false })} />
+                <input type="text" id="descrição" placeholder="coloque uma descrição" className="deck-form-input" {...register("deckDescription", { required: hasInput ? true : false })} />
                 <br />
                 <div className="align-buttons">
                     <button onClick={() => setCardForm(true)} form="cardForm">adicionar cartão</button>

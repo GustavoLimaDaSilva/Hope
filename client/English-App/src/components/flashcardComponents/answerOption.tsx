@@ -18,9 +18,13 @@ export default function AnswerOption({ register, hasBeenSelected, value, index }
         <label htmlFor={`radio-${value}`} className="option">
             <div className="option-upper">
             {"opção " + optNumber}
-            <input key={`radio${optNumber}`} type="radio" id={`radio-${value}`} value={!optionRef.current?.value ? '' : value} {...register('correctAnswer', { required: !hasBeenSelected ? true : false })} />
+            <input key={`radio${optNumber}`} type="radio" 
+            id={`radio-${value}`} value={!optionRef.current?.value ? '' : value} 
+            {...register('correctAnswer', { required: !hasBeenSelected ? true : false })} />
             </div>
-            <input key={`input${optNumber}`} id={`input-${value}`} {...register(`options.${value}`, { required: true })} ref={el => {
+            <input key={`input${optNumber}`} id={`input-${value}`} 
+            {...register(`options.${value}`, { required: true })} 
+           className="deck-form-input" ref={el => {
                 optionRef.current = el
                 ref(el)
             }} />
