@@ -496,7 +496,7 @@ small {
   }
 
   20% {
-    transform: translateY(8vh);
+    transform: translateY(6vh);
   }
 
   25% {
@@ -504,7 +504,7 @@ small {
   }
 
   30% {
-    transform: translateY(8vh);
+    transform: translateY(6vh);
   }
 
   35% {
@@ -512,27 +512,27 @@ small {
   }
 
   40% {
-    transform: translateY(6vh);
-  }
-
-  44% {
     transform: translateY(4vh);
   }
 
+  44% {
+    transform: translateY(2vh);
+  }
+
   48% {
-    transform: translateY(8vh);
+    transform: translateY(6vh);
   }
 
   50% {
-    transform: translateY(7vh);
+    transform: translateY(5vh);
   }
 
   52% {
-    transform: translateY(8vh);
+    transform: translateY(6vh);
   }
 
   90% {
-    transform: translateY(8vh);
+    transform: translateY(6vh);
   }
 
 
@@ -543,10 +543,10 @@ small {
 
 .welcome-letter {
   transform: translateY(-50vh);
-  font-size: 2vw;
+  font-size: var(--average-font-size);
   color: var(--accent-color);
   display: inline-block;
-  padding: 1.5vh 2vw;
+  padding: 1em;
   margin-right: 1vw;
   box-shadow: var(--frutiger-shadow);
   border-radius: 50%;
@@ -563,7 +563,7 @@ small {
   grid-template-columns: repeat(2, 45vw);
   grid-template-rows: 25vh auto;
   justify-content: center;
-  padding-top: 13vh;
+  padding-top: 5dvh;
   row-gap: 10vh;
   height: 100vh;
   overflow: hidden;
@@ -1498,7 +1498,7 @@ margin: 0;
 @media screen and (max-width: 795px) {
 
   .grandient-background:has(form) {
-     height: 80vh;
+     height: 80dvh;
   overflow-y: auto;
   }
 
@@ -1506,10 +1506,10 @@ margin: 0;
   display: flex;
   flex-flow: column;
 align-items: center;  
-gap: 5vh;
-height: 80vh;
+gap: 3dvh;
+height: 70dvh;
 min-height: 0;
-padding-top: 5vh;
+padding-top: 5dvh;
 }
 
 .form-wrapper form {
