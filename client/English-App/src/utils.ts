@@ -28,12 +28,12 @@ export function isEmpty<T extends object>(obj: T): obj is T & Record<string, unk
     return Object.keys(obj).length === 0
 }
 
-export function getPastLocation() {
+export function getLocationBeforeRefresh() {
     const raw = sessionStorage.getItem("location")
     if (!raw) return
 
-    const pastLocation = JSON.parse(raw)
-    return pastLocation
+    const locationBeforeRefresh = JSON.parse(raw)
+    return locationBeforeRefresh
 }
 
 export async function postProfile(profileData: ProfileData | {}) {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createHexId, getMostRecent } from "../../utils.js";
+import { createHexId, getMostRecent} from "../../utils.js";
 import type { DeckType } from "../types/index.js";
 import {
   query,
@@ -43,7 +43,7 @@ router.get("/:uid", async (req, res) => {
     })
 
   } catch (err) {
-    return res.status(404).json([])
+    return res.status(500).json([{err: err}])
   }
 
   try {
@@ -65,7 +65,7 @@ router.get("/:uid", async (req, res) => {
     }) ?? []
 
   } catch (err) {
-    return res.status(404).json([])
+    return res.status(500).json([{error: err}])
   }
   return res.status(200).json({
     lessonDecksData: lessonDecksData,
@@ -118,7 +118,7 @@ router.post("/personalDecks/:uid", async (req, res) => {
       });
     } else {
       await updateDoc(doc(req.db, "users", uid), {
-        flashcardDecks: { ...formData, id: createHexId() }})
+        flashcardDecks: [ {...formData, id: createHexId()} ]})
     }
     return res.status(201).json("Deck created successfully")
 

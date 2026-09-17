@@ -6,6 +6,7 @@ import { DeckReactContext } from "./DeckContext.tsx";
 import ConfirmButton from "./ConfirmButton.tsx";
 import useFormatText from "../../hooks/useFormatText.tsx";
 import { useGoogleUser, useProfileData } from "../../userStore.ts";
+import usePastLocation from "../../hooks/usePastLocation.tsx";
 
 
 export default function Flashcard({ flashcardRef }: { flashcardRef: RefObject<HTMLDivElement | null> }) {
@@ -14,12 +15,16 @@ export default function Flashcard({ flashcardRef }: { flashcardRef: RefObject<HT
     const card = cards[offset]
     
     const navigate = useNavigate({})
+    const lastLocation = usePastLocation()
     const textFormattor = useFormatText()
     
     const googleUser = useGoogleUser((state) => state.googleUser)
     const profileData = useProfileData((state) => state.profileData)
-
-    if (!card) return
+const search = lastLocation?.fullPath === "/lessons/$lessonId" ? 
+lastLocation.search : 
+{level: profileData.level} 
+   
+if (!card) return
     
     return (
         <>
@@ -37,7 +42,12 @@ export default function Flashcard({ flashcardRef }: { flashcardRef: RefObject<HT
                         {renderOptions()}
                     </div>
                         <div className="align-buttons">
-                            <button onClick={() => navigate({ to: `/decks/${googleUser?.uid}`, search: {level: profileData.level} })}>Voltar</button>
+                            <button onClick={() => navigate({ 
+                                to: lastLocation?.fullPath === "/lessons/$lessonId" ?
+                                lastLocation.fullPath 
+                                :
+                                `/decks/${googleUser?.uid}`,
+                                 search: {...search}})}>Voltar</button>
                             <ConfirmButton />
                         </div>
                 </>

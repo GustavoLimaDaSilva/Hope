@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { browserSessionPersistence, getAuth, type Auth } from "firebase/auth";
 import { useGoogleUser, useProfileData } from "../userStore.ts";
-import { getPastLocation, getStoredProfile, isEmpty } from "../utils.ts";
+import { getLocationBeforeRefresh, getStoredProfile, isEmpty } from "../utils.ts";
 
 export default function useBeforeRefresh() {
 
@@ -37,18 +37,18 @@ export default function useBeforeRefresh() {
 
     useEffect(() => {
 
-        const pastLocation = getPastLocation()
-        if (isLoading && pastLocation === "/") navigate({ to: "/login" })
+        const locationBeforeRefresh = getLocationBeforeRefresh()
+        if (isLoading && locationBeforeRefresh === "/") navigate({ to: "/login" })
         else if (isLoading) return
 
         if (!googleUser) {
             navigate({ to: "/login" })
         }
-        else if (googleUser && pastLocation === "/login") {
+        else if (googleUser && locationBeforeRefresh === "/login") {
             navigate({ to: "/dashboard" })
         }
         else {
-            navigate({ to: pastLocation })
+            navigate({ to: locationBeforeRefresh })
         }
     }, [googleUser, isLoading])
 
