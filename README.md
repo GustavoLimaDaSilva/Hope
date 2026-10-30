@@ -61,12 +61,5 @@ git push origin feature/foo
 
 ---
 
-## Challenges
-As a front-end developer, I do not yet have the expertise required to design and manage a production-ready database. For this reason, the application currently relies on JSON files as mock data.
-
-I am still looking for free and legal sources of listening content suitable for language learning.
-
----
-
 ## License
 MIT © Gustavo Lima da Silva
