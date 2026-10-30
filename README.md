@@ -4,7 +4,6 @@
 
 Hope is a web app aimed at teaching beginners the fundamentals of the English language using flashcards, AI chat, and fun content.
 
----
 
 ## Development Setup
 
