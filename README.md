@@ -59,7 +59,5 @@ git push origin feature/foo
 
 - Firebase API (AI and authentication)
 
----
-
 ## License
 MIT © Gustavo Lima da Silva
