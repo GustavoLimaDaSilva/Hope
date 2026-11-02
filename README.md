@@ -4,7 +4,6 @@
 
 Hope is a web app aimed at teaching beginners the fundamentals of the English language using flashcards, AI chat, and fun content.
 
----
 
 ## Development Setup
 
@@ -58,15 +57,6 @@ git push origin feature/foo
 - React Hook Form
 
 - Firebase API (AI and authentication)
-
----
-
-## Challenges
-As a front-end developer, I do not yet have the expertise required to design and manage a production-ready database. For this reason, the application currently relies on JSON files as mock data.
-
-I am still looking for free and legal sources of listening content suitable for language learning.
-
----
 
 ## License
 MIT © Gustavo Lima da Silva
