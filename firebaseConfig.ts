@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -12,9 +13,16 @@ const firebaseConfig = {
   measurementId: "G-3JF7NYKR51",
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
 
+const firebaseApp = initializeApp(firebaseConfig);
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
+
+if (typeof window !== "undefined") {
+  initializeAppCheck(firebaseApp, {
+    provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
+    isTokenAutoRefreshEnabled: true 
+  });
+}
 
 export const model = getGenerativeModel(ai, {
   model: "gemini-2.5-flash",
