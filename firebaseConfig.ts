@@ -9,15 +9,18 @@ const firebaseConfig = {
   storageBucket: "hope-2033a.firebasestorage.app",
   messagingSenderId: "758504931798",
   appId: "1:758504931798:web:7d4bcbf0b00e5832406477",
-  measurementId: "G-3JF7NYKR51"
+  measurementId: "G-3JF7NYKR51",
 };
 
-export const firebaseApp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
 
-export const model = getGenerativeModel(ai, { 
-  model: "gemini-3.5-flash-lite", 
-  systemInstruction: "You are a kind english teacher who offers conversation classes. Reply with basic vocabulary unless you notice the user is in a more advacend english level. If they make some mistake, correct them in a kind, constructive way." });
+export const model = getGenerativeModel(ai, {
+  model: "gemini-2.5-flash",
+  systemInstruction:
+    "You are a kind english teacher who offers conversation classes. Reply with basic vocabulary unless you notice the user is in a more advacend english level. If they make some mistake, correct them in a kind, constructive way.",
+});
 
-export const auth = getAuth(firebaseApp)
+export { firebaseApp };
+export const auth = getAuth(firebaseApp);
