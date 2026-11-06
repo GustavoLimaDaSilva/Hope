@@ -12,11 +12,10 @@ const firebaseConfig = {
   measurementId: "G-3JF7NYKR51",
 };
 
+const firebaseApp = initializeApp(firebaseConfig);
 
-export const firebaseApp = initializeApp(firebaseConfig);
 
-
-initializeAppCheck(firebaseApp, {
+const appCheck = initializeAppCheck(firebaseApp, {
   provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
   isTokenAutoRefreshEnabled: true 
 });
