@@ -1,5 +1,10 @@
-export type MessageOrigin = 'user' | 'model'
+export type MessageOrigin = "user" | "model";
 export interface ChatMessage {
-    role: MessageOrigin,
-    content: string
+  role: MessageOrigin;
+  parts: [
+    {
+      text: string;
+      type: "text";
+    },
+  ];
 }
