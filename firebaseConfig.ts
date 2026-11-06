@@ -2,7 +2,6 @@ import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-ch
 import { initializeApp } from "firebase/app";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
 import { getAuth } from "firebase/auth";
-
 const firebaseConfig = {
   apiKey: "AIzaSyDi2VgfukCM7z53qPlkHWchq3B99qATong",
   authDomain: "hope-2033a.firebaseapp.com",
@@ -14,7 +13,7 @@ const firebaseConfig = {
 };
 
 
-const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
 
 if (typeof window !== "undefined") {
@@ -30,5 +29,4 @@ export const model = getGenerativeModel(ai, {
     "You are a kind english teacher who offers conversation classes. Reply with basic vocabulary unless you notice the user is in a more advacend english level. If they make some mistake, correct them in a kind, constructive way.",
 });
 
-export { firebaseApp };
 export const auth = getAuth(firebaseApp);
