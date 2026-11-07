@@ -1,4 +1,4 @@
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 import { initializeApp } from "firebase/app";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
 import { getAuth } from "firebase/auth";
@@ -16,7 +16,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 
 const appCheck = initializeAppCheck(firebaseApp, {
-  provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
+  provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
   isTokenAutoRefreshEnabled: true 
 });
 
