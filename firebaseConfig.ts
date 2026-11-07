@@ -1,3 +1,4 @@
+// import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 import { initializeApp } from "firebase/app";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
 import { getAuth } from "firebase/auth";
@@ -13,6 +14,12 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
+// if (typeof window !== "undefined") {
+// const appCheck = initializeAppCheck(firebaseApp, {
+//   provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
+//   isTokenAutoRefreshEnabled: true 
+// });
+// }
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
 
 export const model = getGenerativeModel(ai, {
