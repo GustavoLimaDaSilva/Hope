@@ -13,7 +13,7 @@ export default function Video(props: VideoProps) {
     const navigate = useNavigate({})
 
     return (
-        <div className={props.childIndex > props.index ? "lesson-el non-clickable next-el" : "lesson-el current"}>
+        <div className={props.childIndex > props.index ? "lesson-el center-absolute non-clickable next-el" : "lesson-el center-absolute current"}>
             <iframe className="video-frame" src={`https://www.youtube.com/embed/${props.ids?.videoId ?? ''}?list=${props.ids?.playlistId ?? ''}`} allowFullScreen></iframe>
             <div className="align-buttons">
                 <button onClick={() => {
