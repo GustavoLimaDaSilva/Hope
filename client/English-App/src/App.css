@@ -303,7 +303,7 @@ button:disabled {
   display: inline-block;
 }
 
-.nav li:first-of-type {
+.nav > ul >li:first-of-type {
   margin-left: calc(var(--spacing-base-vw) / 2);
 }
 
@@ -1364,10 +1364,10 @@ input[type="file"] {
   box-shadow: var(--frutiger-shadow);
   border-radius: 10px;
   width: clamp(25ch, 50vw, 400px);
-  min-height: 60vh;
+  /* min-height: 60vh; */
   height: fit-content;
   padding-inline: 1em;
-  line-height: 1.5em;
+  line-height: 3.5vh;
   margin-inline: auto;
   display: grid;
   grid-template-rows: minmax(60%, auto) 17%;
