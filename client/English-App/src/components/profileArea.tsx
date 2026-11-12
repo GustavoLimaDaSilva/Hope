@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useGoogleUser, useProfileData } from "../userStore.ts";
 import deleteProfile, {
   getNameFirstLetters,
+  setAwaitLimit,
 } from "../utils.ts";
 import useClickOutside from "../hooks/useClickOutside.tsx";
 
@@ -42,8 +43,10 @@ export default function ProfileArea() {
             <li>
               <button
                 onClick={async () => {
-                  await deleteProfile(profileData.uid);
-                    localStorage.clear();
+                  const res = await setAwaitLimit(deleteProfile(profileData.uid), 2000, "Limit Exceeded")
+                  console.log(res)
+                  
+                  localStorage.clear();
                     reset();
                   
                 }}
