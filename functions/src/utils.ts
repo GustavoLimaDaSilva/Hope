@@ -52,18 +52,3 @@ export async function getPlaylistVideos(apiKey: string | undefined, playlistId: 
     return
   }
 }
-
-export async function setAwaitLimit<T>(
-  promise: Promise<T>,
-  awaitLimit: number,
-  resolveValue: unknown,
-): Promise<T | unknown> {
-
-    let timeoutId: NodeJS.Timeout | undefined;
-
-  const promiseWithTimeout = new Promise((resolve) => {
-    timeoutId = setTimeout(() => resolve(resolveValue), awaitLimit);
-  })
-
-  return Promise.race([promise, promiseWithTimeout]).finally(() => clearTimeout(timeoutId))
-}
