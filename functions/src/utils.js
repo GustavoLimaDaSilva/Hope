@@ -39,4 +39,11 @@ export async function getPlaylistVideos(apiKey, playlistId) {
         return;
     }
 }
+export async function setAwaitLimit(promise, awaitLimit, resolveValue) {
+    let timeoutId;
+    const promiseWithTimeout = new Promise((resolve) => {
+        timeoutId = setTimeout(() => resolve(resolveValue), awaitLimit);
+    });
+    return Promise.race([promise, promiseWithTimeout]).finally(() => clearTimeout(timeoutId));
+}
 //# sourceMappingURL=utils.js.map

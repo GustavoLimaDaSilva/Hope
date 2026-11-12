@@ -1,5 +1,6 @@
 import { Router } from "express";
 import type { ProfileData } from "../types/index.js";
+import { setAwaitLimit } from "../../utils.js";
 // eslint-disable-next-line new-cap
 const router = Router();
 
@@ -60,8 +61,10 @@ router.put("/:uid", async (req, res) => {
 router.delete("/:uid", async (req, res) => {
   const uid = req.params.uid;
 
+  const deleteUser = req.db.collection("users").doc(uid).delete()
+
   try {
-    const docRes = await req.db.collection("users").doc(uid).delete();
+    const docRes = await setAwaitLimit(deleteUser, 3000, "Limit Exceeded");
 
     return res.json(docRes);
   } catch (err) {
