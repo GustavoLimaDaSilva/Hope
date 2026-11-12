@@ -43,9 +43,7 @@ export default function ProfileArea() {
             <li>
               <button
                 onClick={async () => {
-                  const res = await setAwaitLimit(deleteProfile(profileData.uid), 2000, "Limit Exceeded")
-                  console.log(res)
-                  
+                  await setAwaitLimit(deleteProfile(profileData.uid), 2000, "Limit Exceeded")
                   localStorage.clear();
                     reset();
                   
