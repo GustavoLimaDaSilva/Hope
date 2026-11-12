@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getDoc, doc, query, collection, getDocs, DocumentData } from "firebase/firestore";
+import { DocumentData } from "firebase/firestore";
 
 const LESSONS_PLAYLIST_ID = process.env.LESSONS_PLAYLIST_ID
 const API_KEY = process.env.API_KEY
@@ -29,8 +29,8 @@ router.get("/", async (req, res) => {
 
   try {
 
-    const q = query(collection(req.db, "lessons"))
-    const snapshot = await getDocs(q)
+    const ref = req.db.collection("lessons");
+    const snapshot = await ref.get();
     snapshot.forEach((doc) => lessons.push(doc.data()))
     return res.json(lessons)
 
@@ -43,7 +43,8 @@ router.get("/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const lesson = (await getDoc(doc(req.db, "lessons", id))).data()
+    const lesson = req.db.collection("lessons").doc(id).get() 
+
     if (lesson) {
       return res.json(lesson)
     } else {

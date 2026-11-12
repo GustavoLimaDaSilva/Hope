@@ -8,31 +8,37 @@ const decksRoute = (await import("./routes/decks.js")).default;
 const imageAuthRoute = (await import("./routes/imageKitAuth.js")).default;
 const app = express();
 
-import { getFirestore,Firestore, } from "firebase/firestore";
-import { firebaseApp } from "../../../firebaseConfig.js";
+import { getFirestore, Firestore } from "firebase-admin/firestore";
+import { cert, initializeApp } from "firebase-admin/app";
+
+
+const firebaseApp = initializeApp({
+  credential: cert("../../hope-2033a-e0e0e94d97c6.json")
+});
 
 declare global {
   namespace Express {
     interface Request {
-      db: Firestore
+      db: Firestore;
     }
   }
 }
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const port = 3000;
 
-app.use(cors({
-  origin: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    credentials: true,
+  }),
+);
 
 onInit(() => {
-  const db = getFirestore(firebaseApp)
+  const db = getFirestore(firebaseApp);
   app.use((req, res, next) => {
     req.db = db;
     next();
@@ -48,5 +54,3 @@ onInit(() => {
 });
 
 export default app;
-
-

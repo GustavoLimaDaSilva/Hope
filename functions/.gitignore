@@ -1,10 +1,14 @@
 # Compiled JavaScript files
 lib/**/*.js
+
 lib/**/*.js.map
 
-# TypeScript v1 declaration files
 typings/
+
 *.config.js
-# Node.js dependency directory
+
 node_modules/
+
 *.local
+
+hope-2033a-e0e0e94d97c6.json
