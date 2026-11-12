@@ -64,6 +64,7 @@ router.delete("/:uid", async (req, res) => {
   const deleteUser = req.db.collection("users").doc(uid).delete()
 
   try {
+    
     const docRes = await setAwaitLimit(deleteUser, 3000, "Limit Exceeded");
 
     return res.json(docRes);
