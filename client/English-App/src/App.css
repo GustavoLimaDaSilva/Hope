@@ -620,7 +620,7 @@ small {
 }
 
 .toast {
-  inset: 10vh 70% 0 2%;
+  inset: 8vh 70% 0 2%;
   width: clamp(200px, 50ch, 60vw);
   height: fit-content;
   background-color: var(--light-contrast);
@@ -644,6 +644,10 @@ small {
   padding: 1em;
   width: fit-content;
   margin-left: auto;
+}
+
+.decks-available > .toast, .AI-available > .toast {
+  top:  40vh;
 }
 
 .add-deck-button {
