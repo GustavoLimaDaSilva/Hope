@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router"
 import type { ProfileData } from "../../types/index.ts"
-import Toast from "../../components/toast.tsx"
 import DashboardLogic from "../../components/dashboardLogic.tsx"
 import { createFileRoute } from "@tanstack/react-router"
 import { useGoogleUser, useProfileData } from "../../userStore.ts"

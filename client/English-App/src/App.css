@@ -541,7 +541,11 @@ small {
   font-size: var(--average-font-size);
   color: var(--accent-color);
   display: inline-block;
-  padding: 1em;
+  width: 2.5em;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 1vw;
   box-shadow: var(--frutiger-shadow);
   border-radius: 50%;
@@ -551,6 +555,8 @@ small {
 .welcome-message {
   margin-inline: auto;
   width: fit-content;
+  display: flex;
+  flex-direction: row;
 }
 
 .main {
