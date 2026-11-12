@@ -53,11 +53,11 @@ export async function getPlaylistVideos(apiKey: string | undefined, playlistId: 
   }
 }
 
-export async function setAwaitLimit<res>(
-  promise: Promise<res>,
+export async function setAwaitLimit<T>(
+  promise: Promise<T>,
   awaitLimit: number,
   resolveValue: unknown,
-) {
+): Promise<T | unknown> {
 
     let timeoutId: NodeJS.Timeout | undefined;
 
