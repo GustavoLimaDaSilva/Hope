@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
 import { getAuth } from "firebase/auth";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
+import "firebase/app-check";
 const firebaseConfig = {
   apiKey: "AIzaSyDi2VgfukCM7z53qPlkHWchq3B99qATong",
   authDomain: "hope-2033a.firebaseapp.com",
