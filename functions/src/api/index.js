@@ -5,6 +5,7 @@ const usersRoute = (await import("./routes/users.js")).default;
 const lessonsRoute = (await import("./routes/lessons.js")).default;
 const decksRoute = (await import("./routes/decks.js")).default;
 const imageAuthRoute = (await import("./routes/imageKitAuth.js")).default;
+const recaptchaRoute = (await import("./routes/recaptcha.js")).default;
 const app = express();
 import { getFirestore } from "firebase-admin/firestore";
 import { cert, initializeApp } from "firebase-admin/app";
@@ -30,6 +31,7 @@ onInit(() => {
     app.use("/lessons", lessonsRoute);
     app.use("/decks", decksRoute);
     app.use("/auth", imageAuthRoute);
+    app.use("/recaptcha", recaptchaRoute);
     app.listen(port, () => {
         console.log(`Example app listening on port ${port}`);
     });

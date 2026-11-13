@@ -6,14 +6,16 @@ const usersRoute = (await import("./routes/users.js")).default;
 const lessonsRoute = (await import("./routes/lessons.js")).default;
 const decksRoute = (await import("./routes/decks.js")).default;
 const imageAuthRoute = (await import("./routes/imageKitAuth.js")).default;
+const recaptchaRoute = (await import("./routes/recaptcha.js")).default
+
 const app = express();
 
 import { getFirestore, Firestore } from "firebase-admin/firestore";
-import { cert, initializeApp } from "firebase-admin/app";
-
+import { cert, initializeApp, ServiceAccount } from "firebase-admin/app";
+import serviceAccount from "../../hope-2033a-e0e0e94d97c6.json" with { type: "json" };
 
 const firebaseApp = initializeApp({
-  credential: cert("../../hope-2033a-e0e0e94d97c6.json")
+  credential: cert(serviceAccount as ServiceAccount)
 });
 
 declare global {
@@ -47,6 +49,7 @@ onInit(() => {
   app.use("/lessons", lessonsRoute);
   app.use("/decks", decksRoute);
   app.use("/auth", imageAuthRoute);
+  app.use("/recaptcha", recaptchaRoute)
 
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -1,6 +1,5 @@
 import { Router } from "express";
 import type { ProfileData } from "../types/index.js";
-import { setAwaitLimit } from "../../utils.js";
 // eslint-disable-next-line new-cap
 const router = Router();
 

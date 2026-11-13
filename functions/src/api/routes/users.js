@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { setAwaitLimit } from "../../utils.js";
 // eslint-disable-next-line new-cap
 const router = Router();
 router.get("/:uid", async (req, res) => {
@@ -56,7 +55,7 @@ router.put("/:uid", async (req, res) => {
 router.delete("/:uid", async (req, res) => {
     const uid = req.params.uid;
     try {
-        const docRes = await setAwaitLimit(req.db.collection("users").doc(uid).delete(), 3000, "Limit Exceeded");
+        const docRes = await req.db.collection("users").doc(uid).delete();
         return res.json({ resolve: docRes });
     }
     catch (err) {

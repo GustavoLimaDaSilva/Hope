@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "lib/functions",
     "module": "NodeNext",
     "esModuleInterop": true,
     "moduleResolution": "nodenext",
