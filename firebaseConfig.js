@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
 import { getAuth } from "firebase/auth";
 const firebaseConfig = {
@@ -11,15 +12,14 @@ const firebaseConfig = {
     measurementId: "G-3JF7NYKR51",
 };
 export const firebaseApp = initializeApp(firebaseConfig);
-if (typeof window !== "undefined") {
 const appCheck = initializeAppCheck(firebaseApp, {
   provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
   isTokenAutoRefreshEnabled: true 
 });
-}
+
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
 export const model = getGenerativeModel(ai, {
-    model: "gemini-2.5-flash",
+    model: "gemini-4-hydrogen",
     systemInstruction: "You are a kind english teacher who offers conversation classes. Reply with basic vocabulary unless you notice the user is in a more advacend english level. If they make some mistake, correct them in a kind, constructive way.",
 });
 export const auth = getAuth(firebaseApp);
