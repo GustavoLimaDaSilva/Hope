@@ -45,7 +45,33 @@ export default function ChatWithAI() {
           ref={promptRef}
           contentEditable={true}
         />
-        <button disabled={inputIsEmpty} onClick={sendPrompt}>
+        <button
+          disabled={inputIsEmpty}
+          onClick={() => {
+            grecaptcha.enterprise.ready(async () => {
+              const token = await grecaptcha.enterprise.execute(
+                import.meta.env.VITE_RECAPTCHA_SITE_KEY,
+                { action: "send_prompt" },
+              );
+              const res = await fetch(
+                "https://api-o37g4y27ua-uc.a.run.app/recaptcha/verification",
+                {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    action: "send_prompt",
+                    token: token
+                  })
+                },
+              );
+              console.log(await res.json())
+            });
+            sendPrompt();
+          }}
+        >
           <span className="material-symbols-outlined">arrow_upward</span>
         </button>
       </div>
@@ -76,18 +102,19 @@ export default function ChatWithAI() {
   }
 
   async function reply(prompt: string) {
-    
-const chat = model.startChat({
-    history: messages
-})
+    const chat = model.startChat({
+      history: messages,
+    });
 
-const result = await chat.sendMessage(prompt)
-const text = result.response.text()
+    const result = await chat.sendMessage(prompt);
+    const text = result.response.text();
 
-setMessages(prevMessages => [...prevMessages, {
-    role: 'model',
-    parts: [{text: text, type: "text"}]
-}])
-   
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      {
+        role: "model",
+        parts: [{ text: text, type: "text" }],
+      },
+    ]);
   }
 }

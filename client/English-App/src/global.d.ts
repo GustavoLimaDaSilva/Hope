@@ -1,3 +1,4 @@
+
 declare module "*.css";
 declare module "*.svg";
 declare module "*.png";
@@ -12,3 +13,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+declare const grecaptcha: {
+  enterprise: {
+    ready(callback: () => void): void;
+    execute(siteKey: string, options: { action: string }): Promise<string>;
+  };
+};
