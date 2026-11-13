@@ -14,7 +14,6 @@
     "@imagekit/react": "^5.0.1",
     "@tanstack/react-router": "^1.140.1",
     "@tanstack/react-router-devtools": "^1.140.1",
-    "firebase": "^13.3.0",
     "nanoid": "^3.3.11",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
