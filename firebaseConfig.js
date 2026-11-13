@@ -11,12 +11,12 @@ const firebaseConfig = {
     measurementId: "G-3JF7NYKR51",
 };
 export const firebaseApp = initializeApp(firebaseConfig);
-// if (typeof window !== "undefined") {
-// const appCheck = initializeAppCheck(firebaseApp, {
-//   provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
-//   isTokenAutoRefreshEnabled: true 
-// });
-// }
+if (typeof window !== "undefined") {
+const appCheck = initializeAppCheck(firebaseApp, {
+  provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
+  isTokenAutoRefreshEnabled: true 
+});
+}
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
 export const model = getGenerativeModel(ai, {
     model: "gemini-2.5-flash",
