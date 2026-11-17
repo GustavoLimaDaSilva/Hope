@@ -1,10 +1,11 @@
 import type { UseFormRegister } from "react-hook-form"
 import { Opts } from "../../types/index.ts";
 import { useRef } from "react";
+import type { FlashcardSchema } from "../../schemas/deckForm.ts";
 
 type MultipleOptionsProps = {
     hasBeenSelected: string | null | undefined,
-    register: UseFormRegister<{ cardFront: string; options: { a: string; b?: string | undefined; c?: string | undefined; d?: string | undefined; }; imageUrl?: FileList | undefined; correctAnswer?: string | null | undefined; }>,
+    register: UseFormRegister<FlashcardSchema>,
     value: typeof Opts[number],
     index: number,
 }
