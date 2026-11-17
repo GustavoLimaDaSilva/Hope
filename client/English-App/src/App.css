@@ -1374,7 +1374,7 @@ input[type="file"] {
   box-shadow: var(--frutiger-shadow);
   border-radius: 10px;
   width: clamp(25ch, 50vw, 400px);
-  /* min-height: 60vh; */
+  /* min-height: 64vh; */
   height: fit-content;
   padding-inline: 1em;
   line-height: 3.5vh;
@@ -1414,9 +1414,10 @@ input[type="file"] {
 
 .video-frame {
   border-radius: 10px;
-  height: 90%;
+  height: 50vh;
   width: 100%;
-  margin: auto;
+  margin-inline: auto;
+  margin-block: 16px;
   grid-column: 1/2;
 }
 

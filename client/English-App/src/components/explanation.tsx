@@ -13,7 +13,7 @@ export default function Explanation(props: ExplanationProps) {
     const setIndex = props?.setIndex
     const textFormattor = useFormatText()
     const navigate = useNavigate()
-
+console.log(lesson)
     return (
         <div className={props.childIndex === props.index ? "lesson-el current center-absolute" : "lesson-el center-absolute previous-el non-clickable"}>
             <p>{textFormattor(lesson?.explanation)}</p>
