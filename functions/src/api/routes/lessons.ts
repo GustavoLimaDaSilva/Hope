@@ -43,10 +43,11 @@ router.get("/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const lesson = req.db.collection("lessons").doc(id).get() 
+    const lessonRef = req.db.collection("lessons").doc(id)
+    const lesson = await lessonRef.get() 
 
-    if (lesson) {
-      return res.json(lesson)
+    if (lesson.exists) {
+      return res.json(lesson.data())
     } else {
       return res.status(404).json({ message: "Couldn't find lesson" })
     }
