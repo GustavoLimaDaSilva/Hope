@@ -24,7 +24,7 @@
   --incorrect-color: #972020;
   --lighter-incorrect-color: #c12929;
   --unavailable-background: rgba(128, 128, 128, 0.623);
-  --scrollbar-track-background: rgb(183, 183, 183);
+  --scrollbar-track-background: rgb(214, 214, 214);
   --scrollbar-thumb-color: rgb(133, 133, 133);
   --welcome-size: 2.5rem;
   --border-radius-average: 10px;
@@ -869,7 +869,7 @@ li {
 
 ::-webkit-scrollbar-track {
   border-radius: inherit;
-  background-color: var(--scrollbar-track-background);
+  /* background-color: var(--scrollbar-track-background); */
   padding: 1px;
 }
 
@@ -963,7 +963,7 @@ li {
 .user-msg {
   background-color: var(--secondary-color);
   color: var(--light-contrast);
-  padding: 10px;
+  padding: 2px 16px;
   border-radius: 20px;
   margin-block: 5%;
   width: fit-content;
@@ -1426,7 +1426,7 @@ input[type="file"] {
 }
 
 .chat-container {
-  padding-inline: 20vw;
+  padding-inline: 16vw;
   height: 65vh;
   overflow-y: scroll;
 }
