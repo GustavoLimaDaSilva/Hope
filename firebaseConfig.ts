@@ -22,7 +22,7 @@ const appCheck = initializeAppCheck(firebaseApp, {
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
 
 export const model = getGenerativeModel(ai, {
-  model: "gemini-4-hydrogen",
+  model: "gemini-3.5-flash-lite",
   systemInstruction:
     "You are a kind english teacher who offers conversation classes. Reply with basic vocabulary unless you notice the user is in a more advacend english level. If they make some mistake, correct them in a kind, constructive way.",
 });
