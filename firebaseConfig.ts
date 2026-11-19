@@ -15,10 +15,10 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
-// const appCheck = initializeAppCheck(firebaseApp, {
-//   provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
-//   isTokenAutoRefreshEnabled: true 
-// });
+const appCheck = initializeAppCheck(firebaseApp, {
+  provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
+  isTokenAutoRefreshEnabled: true 
+});
 const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
 
 export const model = getGenerativeModel(ai, {
