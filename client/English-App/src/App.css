@@ -968,6 +968,7 @@ li {
   margin-block: 5%;
   width: fit-content;
   max-width: 50%;
+  overflow-wrap: break-word;
   margin-left: auto;
   box-shadow: var(--frutiger-shadow);
 }
@@ -1450,7 +1451,7 @@ input[type="file"] {
 
 .chat-input {
   width: inherit;
-  /* min-height: 7vh; */
+  max-height: 7vh;
   border: none;
   background-color: #efeeee00;
   field-sizing: content;
